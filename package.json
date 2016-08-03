@@ -1,0 +1,48 @@
+{
+  "name": "lin3s-event-bus",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Simple but powerful event bus written in ES2015",
+  "keywords": [
+    "lin3s",
+    "event-bus",
+    "es6",
+    "es2015"
+  ],
+  "authors": [
+    {
+      "name": "LIN3S",
+      "email": "info@lin3s.com",
+      "homepage": "https://lin3s.com"
+    }
+  ],
+  "main": "dist/event-bus.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LIN3S/EventBusJS"
+  },
+  "bugs": {
+    "url": "https://github.com/LIN3S/EventBusJS/issues"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel-core": "^6.10.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "gulp": "^3.9.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

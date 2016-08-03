@@ -1,0 +1,20 @@
+{
+  "name": "lin3s-event-bus",
+  "description": "Simple but powerful event bus written in ES2015",
+  "main": "dist/event-bus.min.js",
+  "authors": [
+    {
+      "name": "LIN3S",
+      "email": "info@lin3s.com",
+      "homepage": "https://lin3s.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "lin3s",
+    "event-bus",
+    "es6",
+    "es2015"
+  ],
+  "homepage": "https://github.com/LIN3S/EventBusJS"
+}
