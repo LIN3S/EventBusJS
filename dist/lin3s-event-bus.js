@@ -228,77 +228,39 @@ exports.default = EventTypes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.EventTypes = exports.EventSubscriber = exports.EventPublisher = exports.Event = exports.DOMReadyEventSubscriber = exports.DOMReadyEvent = undefined;
 
 var _DOMReadyEvent = require('./DOMReadyEvent');
 
-Object.keys(_DOMReadyEvent).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _DOMReadyEvent[key];
-    }
-  });
-});
+var _DOMReadyEvent2 = _interopRequireDefault(_DOMReadyEvent);
 
 var _DOMReadyEventSubscriber = require('./DOMReadyEventSubscriber');
 
-Object.keys(_DOMReadyEventSubscriber).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _DOMReadyEventSubscriber[key];
-    }
-  });
-});
+var _DOMReadyEventSubscriber2 = _interopRequireDefault(_DOMReadyEventSubscriber);
 
 var _Event = require('./Event');
 
-Object.keys(_Event).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _Event[key];
-    }
-  });
-});
+var _Event2 = _interopRequireDefault(_Event);
 
 var _EventPublisher = require('./EventPublisher');
 
-Object.keys(_EventPublisher).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _EventPublisher[key];
-    }
-  });
-});
+var _EventPublisher2 = _interopRequireDefault(_EventPublisher);
 
 var _EventSubscriber = require('./EventSubscriber');
 
-Object.keys(_EventSubscriber).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _EventSubscriber[key];
-    }
-  });
-});
+var _EventSubscriber2 = _interopRequireDefault(_EventSubscriber);
 
 var _EventTypes = require('./EventTypes');
 
-Object.keys(_EventTypes).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _EventTypes[key];
-    }
-  });
-});
+var _EventTypes2 = _interopRequireDefault(_EventTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.DOMReadyEvent = _DOMReadyEvent2.default;
+exports.DOMReadyEventSubscriber = _DOMReadyEventSubscriber2.default;
+exports.Event = _Event2.default;
+exports.EventPublisher = _EventPublisher2.default;
+exports.EventSubscriber = _EventSubscriber2.default;
+exports.EventTypes = _EventTypes2.default;
 
 },{"./DOMReadyEvent":1,"./DOMReadyEventSubscriber":2,"./Event":3,"./EventPublisher":4,"./EventSubscriber":5,"./EventTypes":6}]},{},[7]);

@@ -12,9 +12,18 @@
 
 'use strict';
 
-export * from './DOMReadyEvent';
-export * from './DOMReadyEventSubscriber';
-export * from './Event';
-export * from './EventPublisher';
-export * from './EventSubscriber';
-export * from './EventTypes';
+import DOMReadyEvent from './DOMReadyEvent';
+import DOMReadyEventSubscriber from './DOMReadyEventSubscriber';
+import Event from './Event';
+import EventPublisher from './EventPublisher';
+import EventSubscriber from './EventSubscriber';
+import EventTypes from './EventTypes';
+
+export {
+  DOMReadyEvent,
+  DOMReadyEventSubscriber,
+  Event,
+  EventPublisher,
+  EventSubscriber,
+  EventTypes
+}

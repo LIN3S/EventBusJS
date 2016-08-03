@@ -13,6 +13,7 @@
 'use strict';
 
 import gulp from 'gulp';
+import babel from 'gulp-babel';
 import babelify from 'babelify';
 import browserify from 'browserify';
 import buffer from 'vinyl-buffer';
@@ -25,6 +26,7 @@ const
   paths = {
     npm: './node_modules',
     src: './src',
+    lib: './lib',
     dist: './dist'
   },
   watch = {
@@ -37,7 +39,18 @@ function onError(err) {
   this.emit('end');
 }
 
-gulp.task('js', () => {
+gulp.task('js:lib', () => {
+  return gulp.src(paths.src + '/**/*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(plumber({
+      errorHandler: onError
+    }))
+    .pipe(gulp.dest(paths.lib));
+});
+
+gulp.task('js:dist', () => {
   return browserify(paths.src + '/index.js')
     .transform('babelify', {presets: ['es2015'], comments: false})
     .bundle()
@@ -48,7 +61,7 @@ gulp.task('js', () => {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('js:prod', () => {
+gulp.task('js:dist:prod', () => {
   return browserify(paths.src + '/index.js')
     .transform('babelify', {presets: ['es2015'], comments: false})
     .bundle()
@@ -67,6 +80,4 @@ gulp.task('watch', () => {
   gulp.watch(watch.js, ['js']);
 });
 
-gulp.task('default', ['js']);
-
-gulp.task('prod', ['js:prod']);
+gulp.task('default', ['js:dist', 'js:dist:prod', 'js:lib']);
