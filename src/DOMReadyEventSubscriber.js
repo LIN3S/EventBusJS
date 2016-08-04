@@ -21,7 +21,9 @@ class DOMReadyEventSubscriber extends EventSubscriber {
   }
 
   isSubscribedTo(anEvent) {
-    return anEvent instanceof DOMReadyEvent;
+    const event = new DOMReadyEvent();
+
+    return anEvent.getName() === event.getName();
   }
 }
 

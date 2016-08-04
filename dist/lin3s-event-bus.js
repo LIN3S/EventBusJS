@@ -76,7 +76,9 @@ var DOMReadyEventSubscriber = function (_EventSubscriber) {
   _createClass(DOMReadyEventSubscriber, [{
     key: 'isSubscribedTo',
     value: function isSubscribedTo(anEvent) {
-      return anEvent instanceof _DOMReadyEvent2.default;
+      var event = new _DOMReadyEvent2.default();
+
+      return anEvent.getName() === event.getName();
     }
   }]);
 
@@ -106,8 +108,8 @@ var Event = function () {
   }
 
   _createClass(Event, [{
-    key: 'name',
-    value: function name() {
+    key: 'getName',
+    value: function getName() {
       return this.name;
     }
   }]);

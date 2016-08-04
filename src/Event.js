@@ -17,7 +17,7 @@ class Event {
     this.name = aName;
   }
 
-  name() {
+  getName() {
     return this.name;
   }
 }
