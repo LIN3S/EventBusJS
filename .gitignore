@@ -9,5 +9,6 @@
 # @author Mikel Tuesta <mikel@lin3s.com>
 
 /bower_components
+/dist
 /node_modules
 /npm-debug.log
