@@ -1,7 +1,7 @@
 {
   "name": "lin3s-event-bus",
   "description": "Simple but powerful event bus written in ES2015",
-  "main": "dist/event-bus.min.js",
+  "main": "dist/lin3s-event-bus.umd.min.js",
   "authors": [
     {
       "name": "LIN3S",
