@@ -14,7 +14,7 @@
 import test from 'ava';
 import 'babel-core/register';
 
-import DomReadyEvent from './../src/DomReadyEvent';
+import DomReadyEvent from './../src/DOMReadyEvent';
 
 test('it builds DOMReadyEvent with "DOM_READY" name', (t) => {
   const domReadyEvent = new DomReadyEvent();
