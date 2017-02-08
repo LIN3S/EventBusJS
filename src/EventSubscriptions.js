@@ -12,14 +12,23 @@
 
 'use strict';
 
-import Event from './Domain/Model/Core/Event';
 import EventPublisher from './Domain/Model/Core/EventPublisher';
-import EventSubscriber from './Domain/Model/Core/EventSubscriber';
-import * as EventSubscriptions from './EventSubscriptions';
+import DOMReadyEventSubscriber from './Domain/Event/Dom/DOMReadyEventSubscriber';
 
-export {
-  Event,
-  EventPublisher,
-  EventSubscriber,
-  EventSubscriptions
-}
+const onDomReady = (onReadySubscriber) => {
+  EventPublisher.subscribe(
+    new DOMReadyEventSubscriber(
+      onReadySubscriber
+    )
+  );
+};
+
+const onDomLoaded = (onReadySubscriber) => {
+  EventPublisher.subscribe(
+    new DOMReadyEventSubscriber(
+      onReadySubscriber
+    )
+  );
+};
+
+export {onDomReady, onDomLoaded};

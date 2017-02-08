@@ -12,8 +12,12 @@
 
 'use strict';
 
-const EventTypes = {
-  DOM_READY: 'DOM_READY'
-};
+class DomEventTypeNotValidException extends TypeError {
 
-export default EventTypes;
+  constructor() {
+    super('Provided event type is not supported');
+  }
+
+}
+
+export default DomEventTypeNotValidException;

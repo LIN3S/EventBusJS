@@ -7,17 +7,19 @@
  * file that was distributed with this source code.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
+ * @author Mikel Tuesta <mikel@lin3s.com>
  */
 
 'use strict';
 
-import test from 'ava';
-import 'babel-core/register';
+import Event from './../Core/Event';
+import DomEventTypes from './DomEventTypes';
 
-import Event from '../src/Domain/Model/Core/Event';
+class DomEvent extends Event {
+  constructor(domEventType) {
+    this.type = domEventType;
+    super(this.type.type);
+  }
+}
 
-test('it builds event with a given name', (t) => {
-  const event = new Event('EVENT_NAME');
-
-  t.is(event.getName(), 'EVENT_NAME');
-});
+export default DomEvent;

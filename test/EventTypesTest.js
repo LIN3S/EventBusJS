@@ -14,7 +14,7 @@
 import test from 'ava';
 import 'babel-core/register';
 
-import EventTypes from './../src/EventTypes';
+import EventTypes from '../src/Domain/Model/Dom/DomEventTypes';
 
 test('it returns the event types', (t) => {
   t.deepEqual(EventTypes, {'DOM_READY': 'DOM_READY'});

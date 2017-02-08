@@ -14,9 +14,9 @@
 import test from 'ava';
 import 'babel-core/register';
 
-import DOMReadyEventSubscriber from './../src/DOMReadyEventSubscriber';
-import Event from './../src/Event';
-import DOMReadyEvent from './../src/DOMReadyEvent';
+import DOMReadyEventSubscriber from '../src/Domain/Event/Dom/DOMReadyEventSubscriber';
+import Event from '../src/Domain/Model/Core/Event';
+import DOMReadyEvent from '../src/Domain/Model/Dom/DomReadyEvent';
 
 test('it subscribes to handled event', (t) => {
   const

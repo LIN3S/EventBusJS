@@ -12,8 +12,8 @@
 
 'use strict';
 
-import EventSubscriber from './EventSubscriber';
-import DOMReadyEvent from './DOMReadyEvent';
+import EventSubscriber from './../../Model/Core/EventSubscriber';
+import DOMReadyEvent from '../../Model/Dom/DomReadyEvent';
 
 class DOMReadyEventSubscriber extends EventSubscriber {
   constructor(aCallback) {

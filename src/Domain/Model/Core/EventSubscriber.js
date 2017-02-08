@@ -14,10 +14,9 @@
 
 class EventSubscriber {
   constructor(aCallback) {
-// Following code makes this class Abstract, but UglifyJS does not recognizes "new." operator yet.
-//     if (new.target === Abstract) {
-//       throw new TypeError('Cannot construct Abstract instances directly');
-//     }
+    if (this.constructor === EventSubscriber) {
+      throw new TypeError('Cannot construct Abstract instances directly');
+    }
 
     this.callback = aCallback;
   }

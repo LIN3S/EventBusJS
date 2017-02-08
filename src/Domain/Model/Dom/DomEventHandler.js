@@ -12,13 +12,8 @@
 
 'use strict';
 
-import Event from './Event';
-import EventTypes from './EventTypes';
+class DomEventHandler {
 
-class DOMReadyEvent extends Event {
-  constructor() {
-    super(EventTypes.DOM_READY);
-  }
 }
 
-export default DOMReadyEvent;
+export default DomEventHandler;
