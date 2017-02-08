@@ -12,16 +12,19 @@
 
 'use strict';
 
-import Event from './Event';
-import EventPublisher from './EventPublisher';
 import EventSubscriber from './EventSubscriber';
-import * as DOMEventSubscriptions from './DOMEventSubscriptions';
-import * as DOMEventPublishers from './DOMEventPublishers';
+import DOMLoadedEvent from './DOMLoadedEvent';
 
-export {
-  Event,
-  EventPublisher,
-  EventSubscriber,
-  DOMEventSubscriptions,
-  DOMEventPublishers
+class DOMLoadedEventSubscriber extends EventSubscriber {
+  constructor(aCallback) {
+    super(aCallback);
+  }
+
+  isSubscribedTo(anEvent) {
+    const event = new DOMLoadedEvent();
+
+    return anEvent.getName() === event.getName();
+  }
 }
+
+export default DOMLoadedEventSubscriber;

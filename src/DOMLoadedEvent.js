@@ -7,18 +7,18 @@
  * file that was distributed with this source code.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
+ * @author Mikel Tuesta <mikel@lin3s.com>
  */
 
 'use strict';
 
-import test from 'ava';
-import 'babel-core/register';
+import Event from './Event';
+import EventTypes from './EventTypes';
 
-import EventTypes from './../src/EventTypes';
+class DOMLoadedEvent extends Event {
+  constructor() {
+    super(EventTypes.DOM_LOADED);
+  }
+}
 
-test('it returns the event types', (t) => {
-  t.deepEqual(EventTypes, {
-    'DOM_READY': 'DOM_READY',
-    'DOM_LOADED': 'DOM_LOADED'
-  });
-});
+export default DOMLoadedEvent;

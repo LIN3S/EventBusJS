@@ -15,17 +15,28 @@ import {join} from 'path';
 
 const include = join(__dirname, 'src');
 
-export default {
-  entry: './src/index',
-  output: {
-    path: join(__dirname, 'dist'),
-    libraryTarget: 'umd',
-    library: 'lin3s-event-bus',
-  },
-  devtool: 'source-map',
-  module: {
-    loaders: [
-      {test: /\.js$/, loader: 'babel', include}
-    ]
-  }
+const isUmd = (options) => {
+  return typeof options !== 'undefined'
+    && typeof options.libraryTarget !== 'undefined'
+    && options.libraryTarget === 'umd';
+};
+
+export default (options) => {
+  return {
+    entry: './src/index',
+    output: {
+      path: join(__dirname, 'dist'),
+      libraryTarget: isUmd(options) ? 'window' : 'commonjs'
+    },
+    devtool: 'source-map',
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          include
+        }
+      ]
+    }
+  };
 }

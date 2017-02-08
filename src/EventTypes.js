@@ -13,7 +13,8 @@
 'use strict';
 
 const EventTypes = {
-  DOM_READY: 'DOM_READY'
+  DOM_READY: 'DOM_READY',
+  DOM_LOADED: 'DOM_LOADED'
 };
 
 export default EventTypes;
