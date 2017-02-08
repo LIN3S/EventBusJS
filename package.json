@@ -16,7 +16,7 @@
       "homepage": "https://lin3s.com"
     }
   ],
-  "main": "dist/index.js",
+  "main": "dist/lin3s-event-bus.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/LIN3S/EventBusJS"
