@@ -15,13 +15,15 @@
 import Event from './Event';
 import EventPublisher from './EventPublisher';
 import EventSubscriber from './EventSubscriber';
-import * as DOMEventSubscriptions from './DOMEventSubscriptions';
-import * as DOMEventPublishers from './DOMEventPublishers';
+import {onDomReady, onDomLoaded} from './DOMEventSubscriptions';
+import {listenDomReady, listenDomLoaded} from './DOMEventPublishers';
 
 export {
   Event,
   EventPublisher,
   EventSubscriber,
-  DOMEventSubscriptions,
-  DOMEventPublishers
+  onDomReady,
+  onDomLoaded,
+  listenDomReady,
+  listenDomLoaded
 }
