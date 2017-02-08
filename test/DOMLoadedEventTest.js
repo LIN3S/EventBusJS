@@ -14,7 +14,7 @@
 import test from 'ava';
 import 'babel-core/register';
 
-import DomLoadedEvent from './../src/DomLoadedEvent';
+import DomLoadedEvent from './../src/DOMLoadedEvent';
 
 test('it builds DOMLoadedEvent with "DOM_LOADED" name', (t) => {
   const domLoadedEvent = new DomLoadedEvent();
