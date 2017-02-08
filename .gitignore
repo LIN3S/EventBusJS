@@ -9,6 +9,8 @@
 # @author Mikel Tuesta <mikel@lin3s.com>
 
 /bower_components
+/demo
 /dist
 /node_modules
 /npm-debug.log
+/yarn.lock

@@ -32,9 +32,10 @@
     "test": "ava",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
-    "build:main": "babel --copy-files --out-dir dist src",
-    "build:umd": "webpack --output-filename lin3s-event-bus.umd.js",
-    "build:umd.min": "webpack --output-filename lin3s-event-bus.umd.min.js -p"
+    "build:main": "webpack --output-filename lin3s-event-bus.js",
+    "build:main.min": "webpack --output-filename lin3s-event-bus.js -p",
+    "build:umd": "webpack --output-filename lin3s-event-bus.umd.js --env.libraryTarget umd",
+    "build:umd.min": "webpack --output-filename lin3s-event-bus.umd.min.js --env.libraryTarget umd -p"
   },
   "babel": {
     "presets": [
@@ -52,6 +53,6 @@
     "babelify": "^7.3.0",
     "npm-run-all": "^3.0.0",
     "rimraf": "^2.5.4",
-    "webpack": "^1.13.2"
+    "webpack": "^2.2"
   }
 }

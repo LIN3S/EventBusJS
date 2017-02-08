@@ -14,11 +14,10 @@
 import test from 'ava';
 import 'babel-core/register';
 
-import EventTypes from './../src/EventTypes';
+import DomLoadedEvent from './../src/DomLoadedEvent';
 
-test('it returns the event types', (t) => {
-  t.deepEqual(EventTypes, {
-    'DOM_READY': 'DOM_READY',
-    'DOM_LOADED': 'DOM_LOADED'
-  });
+test('it builds DOMLoadedEvent with "DOM_LOADED" name', (t) => {
+  const domLoadedEvent = new DomLoadedEvent();
+
+  t.is(domLoadedEvent.getName(), 'DOM_LOADED');
 });
