@@ -7,13 +7,16 @@
 [![devDependency Status](https://img.shields.io/david/LIN3S/EventBusJS.svg?style=flat-square)](https://david-dm.org/LIN3S/EventBusJS#info=dependencies)
 
 ##Installation
-The recommended and the most suitable way to install is through *NPM*.
-```shell
+The recommended and the most suitable way to install is through *Yarn*:
+```bash
+$ yarn add lin3s-event-bus
+```
+or alternatively through *NPM*:
+```bash
 $ npm install --save lin3s-event-bus
 ```
-
 Also, you can install through *Bower*.
-```shell
+```bash
 $ bower install --save lin3s-event-bus
 ```
 
@@ -21,7 +24,7 @@ $ bower install --save lin3s-event-bus
 ```js
 // your-dom-js-file.js
 
-import { onDomReady, onDomLoaded } from 'lin3s-event-bus';
+import {onDomReady, onDomLoaded} from 'lin3s-event-bus';
 
 const onReady = (anEvent) => {
     console.log('DOM is ready!');
