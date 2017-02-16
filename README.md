@@ -19,17 +19,6 @@ $ bower install --save lin3s-event-bus
 
 ##Usage
 ```js
-// app.js
-
-import { listenDomReady, listenDomLoaded } from 'lin3s-event-bus';
-
-(() => {
-  listenDomReady();
-  listenDomLoaded();
-})();
-```
-
-```js
 // your-dom-js-file.js
 
 import { onDomReady, onDomLoaded } from 'lin3s-event-bus';
@@ -42,12 +31,8 @@ const onLoaded = (anEvent) => {
     console.log('window is loaded!');
 };
 
-const init = () => {
-  onDomReady(onReady);
-  onDomLoaded(onLoaded);
-};
-
-export default init();
+onDomReady(onReady);
+onDomLoaded(onLoaded);
 ```
 
 ##Licensing Options

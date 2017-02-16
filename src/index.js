@@ -18,12 +18,13 @@ import EventSubscriber from './EventSubscriber';
 import {onDomReady, onDomLoaded} from './DOMEventSubscriptions';
 import {listenDomReady, listenDomLoaded} from './DOMEventPublishers';
 
+listenDomReady();
+listenDomLoaded();
+
 export {
   Event,
   EventPublisher,
   EventSubscriber,
   onDomReady,
-  onDomLoaded,
-  listenDomReady,
-  listenDomLoaded
+  onDomLoaded
 }
