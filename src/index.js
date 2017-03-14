@@ -15,16 +15,18 @@
 import Event from './Event';
 import EventPublisher from './EventPublisher';
 import EventSubscriber from './EventSubscriber';
-import {onDomReady, onDomLoaded} from './DOMEventSubscriptions';
-import {listenDomReady, listenDomLoaded} from './DOMEventPublishers';
+import {onDomReady, onDomLoaded, onWindowResized} from './DOMEventSubscriptions';
+import {listenDomReady, listenDomLoaded, listenWindowResized} from './DOMEventPublishers';
 
 listenDomReady();
 listenDomLoaded();
+listenWindowResized();
 
 export {
   Event,
   EventPublisher,
   EventSubscriber,
   onDomReady,
-  onDomLoaded
+  onDomLoaded,
+  onWindowResized
 }

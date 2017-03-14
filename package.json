@@ -43,6 +43,9 @@
       "stage-2"
     ]
   },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8"
+  },
   "devDependencies": {
     "ava": "^0.15.2",
     "babel-cli": "^6.14.0",
@@ -54,5 +57,8 @@
     "npm-run-all": "^3.0.0",
     "rimraf": "^2.5.4",
     "webpack": "^2.2"
+  },
+  "peerDependencies": {
+    "lodash.debounce": "^4.0.8"
   }
 }

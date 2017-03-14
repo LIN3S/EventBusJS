@@ -15,6 +15,7 @@
 import EventPublisher from './EventPublisher';
 import DOMReadyEventSubscriber from './DOMReadyEventSubscriber';
 import DOMLoadedEventSubscriber from './DOMLoadedEventSubscriber';
+import WindowResizedEventSubscriber from './WindowResizedEventSubscriber';
 
 const onDomReady = (onReadySubscriber) => {
   EventPublisher.subscribe(
@@ -32,4 +33,12 @@ const onDomLoaded = (onLoadedSubscriber) => {
   );
 };
 
-export {onDomReady, onDomLoaded};
+const onWindowResized = (onWindowResizedSubscriber) => {
+  EventPublisher.subscribe(
+    new WindowResizedEventSubscriber(
+      onWindowResizedSubscriber
+    )
+  );
+};
+
+export {onDomReady, onDomLoaded, onWindowResized};

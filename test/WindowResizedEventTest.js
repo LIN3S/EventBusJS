@@ -6,7 +6,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author Beñat Espiña <benatespina@gmail.com>
+ * @author Mikel Tuesta <mikel@lin3s.com>
  */
 
 'use strict';
@@ -14,12 +14,10 @@
 import test from 'ava';
 import 'babel-core/register';
 
-import EventTypes from './../src/EventTypes';
+import WindowResizedEvent from './../src/WindowResizedEvent';
 
-test('it returns the event types', (t) => {
-  t.deepEqual(EventTypes, {
-    'DOM_READY': 'DOM_READY',
-    'DOM_LOADED': 'DOM_LOADED',
-    'WINDOW_RESIZED': 'WINDOW_RESIZED'
-  });
+test('it builds WindowResizedEvent with "WINDOW_RESIZED" name', (t) => {
+  const windowResizedEvent = new WindowResizedEvent();
+
+  t.is(windowResizedEvent.getName(), 'WINDOW_RESIZED');
 });
