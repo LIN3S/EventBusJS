@@ -12,10 +12,13 @@
 
 'use strict';
 
-const EventTypes = {
-  DOM_READY: 'DOM_READY',
-  DOM_LOADED: 'DOM_LOADED',
-  WINDOW_RESIZED: 'WINDOW_RESIZED'
-};
+import Event from './Event';
+import EventTypes from './EventTypes';
 
-export default EventTypes;
+class WindowResizedEvent extends Event {
+  constructor() {
+    super(EventTypes.WINDOW_RESIZED);
+  }
+}
+
+export default WindowResizedEvent;

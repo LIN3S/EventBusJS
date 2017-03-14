@@ -15,6 +15,8 @@
 import EventPublisher from './EventPublisher';
 import DOMReadyEvent from './DOMReadyEvent';
 import DOMLoadedEvent from './DOMLoadedEvent';
+import WindowResizedEvent from './WindowResizedEvent';
+import debounce from 'lodash.debounce';
 
 const listenDomReady = () => {
   document.addEventListener('DOMContentLoaded', () => {
@@ -32,4 +34,12 @@ const listenDomLoaded = () => {
   });
 };
 
-export {listenDomReady, listenDomLoaded};
+const listenWindowResized = (debounceDelay = 200) => {
+  window.addEventListener('resize', debounce(() => {
+    EventPublisher.publish(
+      new WindowResizedEvent()
+    );
+  }, debounceDelay));
+};
+
+export {listenDomReady, listenDomLoaded, listenWindowResized};
