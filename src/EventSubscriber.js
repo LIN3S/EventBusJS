@@ -14,8 +14,6 @@
 
 class EventSubscriber {
   constructor(aCallback) {
-    console.log(this.constructor.name);
-
     if (this.constructor.name === 'EventSubscriber') {
       throw new TypeError("Abstract class EventSubscriber cannot be instantiated directly.");
     }
