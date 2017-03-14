@@ -15,7 +15,7 @@
 class EventSubscriber {
   constructor(aCallback) {
     if (this.constructor.name === 'EventSubscriber') {
-      throw new TypeError("Abstract class EventSubscriber cannot be instantiated directly.");
+      throw new TypeError('Abstract class EventSubscriber cannot be instantiated directly.');
     }
 
     this.callback = aCallback;
@@ -30,7 +30,7 @@ class EventSubscriber {
   }
 
   isSubscribedTo(anEvent) {
-    throw new TypeError("In order to extend EventSubscriber class you must implement isSubscribedTo method.");
+    throw new TypeError('In order to extend EventSubscriber class you must implement isSubscribedTo method.');
   }
 }
 
