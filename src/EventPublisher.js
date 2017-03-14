@@ -33,9 +33,7 @@ class EventPublisher {
 
   publish(anEvent) {
     for (let subscriber in this.subscribers) {
-      if (this.subscribers[subscriber].isSubscribedTo(anEvent)) {
-        this.subscribers[subscriber].handle(anEvent);
-      }
+      this.subscribers[subscriber].handle(anEvent);
     }
   }
 }
