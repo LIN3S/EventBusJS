@@ -31,8 +31,13 @@ class PriorityQueue {
     };
 
     this.remove = (aSubscriber) => {
+      const aSubscriberIndex = queue.indexOf(aSubscriber);
+      if (aSubscriberIndex < 0) {
+        return;
+      }
+
       this.isSorted = false;
-      queue.splice(this.findIndex(subscriber => aSubscriber === subscriber), 1);
+      queue.splice(aSubscriberIndex, 1);
     };
 
     this.getSubscribers = () => {
