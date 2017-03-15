@@ -30,11 +30,24 @@ export default (options) => {
     },
     devtool: 'source-map',
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
-          include
+          include,
+          use: [
+            {
+              loader: 'babel-loader',
+              query: {
+                plugins: [
+                  ["transform-runtime", {
+                    "helpers": false,
+                    "polyfill": true,
+                    "regenerator": false
+                  }]
+                ]
+              }
+            }
+          ]
         }
       ]
     }

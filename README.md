@@ -20,27 +20,59 @@ Also, you can install through *Bower*.
 $ bower install --save lin3s-event-bus
 ```
 
-##Usage
+##Usage (No priority)
 ```js
 // your-dom-js-file.js
-
 import {onDomReady, onDomLoaded, onWindowResized} from 'lin3s-event-bus';
 
-const onReady = (anEvent) => {
-    console.log('DOM is ready!');
+const onReady = (domReadyEvent) => {
+  console.log('DOM is ready!');
 };
 
-const onLoaded = (anEvent) => {
-    console.log('window is loaded!');
+const onLoaded = (domLoadedEvent) => {
+  console.log('window is loaded!');
 };
 
-const onResized = (anEvent) => {
-    console.log('window is resized!');
+const onResized = (windowResizedEvent) => {
+  const
+    newWindowHeight = windowResizedEvent.windowWidth,
+    newWindowWidth = windowResizedEvent.windowWidth;
+  console.log('window is resized!', newWindowWidth, newWindowHeight);
 };
 
+// If not provided, default priority is 0 (lowest)
 onDomReady(onReady);
 onDomLoaded(onLoaded);
 onWindowResized(onResized);
+```
+
+##Usage (Priority based subscribers)
+```js
+// module-a.js
+import {onWindowResized} from 'lin3s-event-bus';
+
+const onResized = (windowResizedEvent) => {
+  // This will be called after moduleA's onResized callback
+  const
+    newWindowHeight = windowResizedEvent.windowWidth,
+    newWindowWidth = windowResizedEvent.windowWidth;
+  console.log('Module A - window is resized!', newWindowWidth, newWindowHeight);
+};
+
+onWindowResized(onResized, 0);
+
+// module-b.js
+import {onWindowResized} from 'lin3s-event-bus';
+
+const onResized = (windowResizedEvent) => {
+  // This will be called before moduleB's onResized callback
+  const
+    newWindowHeight = windowResizedEvent.windowWidth,
+    newWindowWidth = windowResizedEvent.windowWidth;
+  console.log('Module B - window is resized!', newWindowWidth, newWindowHeight);
+};
+
+onWindowResized(onResized, 1);
 ```
 
 ##Licensing Options
