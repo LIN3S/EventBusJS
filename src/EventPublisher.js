@@ -28,9 +28,10 @@ class EventPublisher {
   }
 
   publish(anEvent) {
-    for (const subscriber of this.subscribers) {
+    const subscribers = this.subscribers.getSubscribers();
+    subscribers.forEach((subscriber) => {
       subscriber.handle(anEvent);
-    }
+    });
   }
 }
 

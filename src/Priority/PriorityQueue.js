@@ -12,42 +12,35 @@
 'use strict';
 
 class PriorityQueue {
-
-  queue = [];
-  isSorted = false;
-
-  sort() {
-    this.queue.sort((aSubscriber, anotherSubscriber) => {
-      return anotherSubscriber.priority.priority - aSubscriber.priority.priority;
-    });
+  constructor() {
+    const queue = [];
 
     this.isSorted = true;
-  }
 
-  push(aSubscriber) {
-    this.isSorted = false;
-    this.queue.push(aSubscriber);
-  }
+    this.sort = () => {
+      queue.sort((aSubscriber, anotherSubscriber) => {
+        return anotherSubscriber.priority.getPriority() - aSubscriber.priority.getPriority();
+      });
 
-  remove(aSubscriber) {
-    this.isSorted = false;
-    this.queue.splice(this.findIndex(subscriber => aSubscriber === subscriber), 1);
-  }
+      this.isSorted = true;
+    };
 
-  [Symbol.iterator]() {
-    if (!this.isSorted) {
-      this.sort();
-    }
+    this.push = (aSubscriber) => {
+      this.isSorted = false;
+      queue.push(aSubscriber);
+    };
 
-    let index = -1;
+    this.remove = (aSubscriber) => {
+      this.isSorted = false;
+      queue.splice(this.findIndex(subscriber => aSubscriber === subscriber), 1);
+    };
 
-    return {
-      next: () => {
-        return {
-          value: this.queue[++index],
-          done: !(index in this.queue)
-        }
+    this.getSubscribers = () => {
+      if (!this.isSorted) {
+        this.sort();
       }
+
+      return queue;
     };
   }
 }

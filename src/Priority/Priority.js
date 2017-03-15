@@ -11,27 +11,17 @@
 
 'use strict';
 
-const priorityMap = new WeakMap();
-
 class Priority {
   constructor(priority = 0) {
-    this.priority = priority;
-  }
-
-  get priority() {
-    return priorityMap.get(this);
-  }
-
-  set priority(priority) {
-    if (this.priority !== undefined) {
-      throw new Error('You cannot set the priority during execution.');
-    }
-
     if (!(typeof priority === "number" && isFinite(priority) && Math.floor(priority) === priority && priority >= 0)) {
       throw new TypeError('Priority must be a positive integer.');
     }
 
-    priorityMap.set(this, priority);
+    const privatePriority = priority;
+
+    this.getPriority = () => {
+      return privatePriority;
+    };
   }
 }
 

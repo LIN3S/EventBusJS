@@ -36,16 +36,7 @@ export default (options) => {
           include,
           use: [
             {
-              loader: 'babel-loader',
-              query: {
-                plugins: [
-                  ["transform-runtime", {
-                    "helpers": false,
-                    "polyfill": true,
-                    "regenerator": false
-                  }]
-                ]
-              }
+              loader: 'babel-loader'
             }
           ]
         }
