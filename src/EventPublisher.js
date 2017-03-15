@@ -12,28 +12,24 @@
 
 'use strict';
 
+import PriorityQueue from './Priority/PriorityQueue';
+
 class EventPublisher {
   constructor() {
-    this.id = 0;
-    this.subscribers = {};
+    this.subscribers = new PriorityQueue();
   }
 
   subscribe(aSubscriber) {
-    let id = this.id;
-
-    this.subscribers[id] = aSubscriber;
-    this.id++;
-
-    return id;
+    this.subscribers.push(aSubscriber);
   }
 
-  unsubscribe(aSubscriberId) {
-    this.subscribers.removeProperty(aSubscriberId);
+  unsubscribe(aSubscriber) {
+    this.subscribers.remove(aSubscriber);
   }
 
   publish(anEvent) {
-    for (let subscriber in this.subscribers) {
-      this.subscribers[subscriber].handle(anEvent);
+    for (const subscriber of this.subscribers) {
+      subscriber.handle(anEvent);
     }
   }
 }

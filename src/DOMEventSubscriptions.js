@@ -16,27 +16,31 @@ import EventPublisher from './EventPublisher';
 import DOMReadyEventSubscriber from './DOMReadyEventSubscriber';
 import DOMLoadedEventSubscriber from './DOMLoadedEventSubscriber';
 import WindowResizedEventSubscriber from './WindowResizedEventSubscriber';
+import Priority from './Priority/Priority';
 
-const onDomReady = (onReadySubscriber) => {
+const onDomReady = (onReadyCallback, priority) => {
   EventPublisher.subscribe(
     new DOMReadyEventSubscriber(
-      onReadySubscriber
+      onReadyCallback,
+      new Priority(priority)
     )
   );
 };
 
-const onDomLoaded = (onLoadedSubscriber) => {
+const onDomLoaded = (onLoadedCallback, priority) => {
   EventPublisher.subscribe(
     new DOMLoadedEventSubscriber(
-      onLoadedSubscriber
+      onLoadedCallback,
+      new Priority(priority)
     )
   );
 };
 
-const onWindowResized = (onWindowResizedSubscriber) => {
+const onWindowResized = (onWindowResizedCallback, priority) => {
   EventPublisher.subscribe(
     new WindowResizedEventSubscriber(
-      onWindowResizedSubscriber
+      onWindowResizedCallback,
+      new Priority(priority)
     )
   );
 };

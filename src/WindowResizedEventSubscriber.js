@@ -16,8 +16,8 @@ import EventSubscriber from './EventSubscriber';
 import WindowResizedEvent from './WindowResizedEvent';
 
 class WindowResizedEventSubscriber extends EventSubscriber {
-  constructor(aCallback) {
-    super(aCallback);
+  constructor(aCallback, aPriority) {
+    super(aCallback, aPriority);
   }
 
   isSubscribedTo(anEvent) {

@@ -16,8 +16,8 @@ import EventSubscriber from './EventSubscriber';
 import DOMLoadedEvent from './DOMLoadedEvent';
 
 class DOMLoadedEventSubscriber extends EventSubscriber {
-  constructor(aCallback) {
-    super(aCallback);
+  constructor(aCallback, aPriority) {
+    super(aCallback, aPriority);
   }
 
   isSubscribedTo(anEvent) {
