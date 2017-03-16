@@ -12,16 +12,13 @@
 
 'use strict';
 
-import Event from './Event';
-import EventTypes from './EventTypes';
+import test from 'ava';
+import 'babel-core/register';
 
-class WindowResizedEvent extends Event {
-  constructor(windowHeight, windowWidth) {
-    super(EventTypes.WINDOW_RESIZED);
+test('priority is a positive integer', (t) => {
+  // Test given priority (constructor parameter) is positive and integer.
+});
 
-    this.windowHeight = windowHeight;
-    this.windowWidth = windowWidth;
-  }
-}
-
-export default WindowResizedEvent;
+test('priority cannot be set during execution', (t) => {
+  // Test setting priority once initialized Priority vo, during execution.
+});

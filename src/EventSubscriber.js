@@ -12,13 +12,16 @@
 
 'use strict';
 
+import Priority from './Priority/Priority';
+
 class EventSubscriber {
-  constructor(aCallback) {
+  constructor(aCallback, priority = new Priority()) {
     if (this.constructor.name === 'EventSubscriber') {
       throw new TypeError('Abstract class EventSubscriber cannot be instantiated directly.');
     }
 
     this.callback = aCallback;
+    this.priority = priority;
   }
 
   handle(anEvent) {

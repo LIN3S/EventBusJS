@@ -30,11 +30,15 @@ export default (options) => {
     },
     devtool: 'source-map',
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
-          include
+          include,
+          use: [
+            {
+              loader: 'babel-loader'
+            }
+          ]
         }
       ]
     }

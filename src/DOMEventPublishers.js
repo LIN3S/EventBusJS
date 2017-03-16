@@ -37,7 +37,7 @@ const listenDomLoaded = () => {
 const listenWindowResized = (debounceDelay = 200) => {
   window.addEventListener('resize', debounce(() => {
     EventPublisher.publish(
-      new WindowResizedEvent()
+      new WindowResizedEvent(window.innerHeight, window.innerWidth)
     );
   }, debounceDelay));
 };
