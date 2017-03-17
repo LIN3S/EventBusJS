@@ -16,6 +16,10 @@ node_js:
   - 4
   - 5
   - 6
+  - 7
+
+before_install:
+    - npm install -g yarn
 
 install:
     - yarn install
@@ -26,3 +30,5 @@ script:
 
 cache:
     yarn: true
+    directories:
+        - node_modules
