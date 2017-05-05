@@ -1,6 +1,6 @@
 {
   "name": "lin3s-event-bus",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "license": "MIT",
   "description": "Simple but powerful event bus written in ES2015",
   "keywords": [
