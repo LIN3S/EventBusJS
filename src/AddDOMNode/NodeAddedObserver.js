@@ -19,12 +19,13 @@ import Priority from './../Priority/Priority';
 
 class NodeAddedObserver {
 
+  isMutationObserverInitialized;
   mutationObserver;
   subscribersSelectorClassNames;
 
   constructor() {
     this.subscribersSelectorClassNames = [];
-    this.initMutationObserver();
+    this.isMutationObserverInitialized = false;
   }
 
   initMutationObserver() {
@@ -38,6 +39,8 @@ class NodeAddedObserver {
     const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
     this.mutationObserver = new MutationObserver(this.onNodeMutated.bind(this));
     this.mutationObserver.observe(targetNode, observerConfig);
+
+    this.isMutationObserverInitialized = true;
   }
 
   subscribe(selectorClassName, onNodeAddedCallback, priority) {
@@ -56,23 +59,48 @@ class NodeAddedObserver {
         selectorClassName
       )
     );
+
+    if (this.isMutationObserverInitialized) {
+      return;
+    }
+
+    this.initMutationObserver();
   }
 
   onNodeMutated(mutations) {
     mutations.forEach(mutation =>
       Array.from(mutation.addedNodes)
         .forEach(node => {
-          const nodeSelectorClassName = this.subscribersSelectorClassNames.filter(selectorClassName =>
-            node.classList !== undefined && node.classList.contains(selectorClassName)
-          );
+          const matchedSelectorClassName = this.getMatchedSelectorClassNameByNode(node);
 
-          if (nodeSelectorClassName.length > 0) {
+          if (matchedSelectorClassName !== undefined) {
             EventPublisher.publish(
-              new NodeAddedEvent(node, nodeSelectorClassName[0])
+              new NodeAddedEvent(node, matchedSelectorClassName)
             );
           }
         })
     );
+  }
+
+  getMatchedSelectorClassNameByNode(rootNode) {
+    let matchedSelectorClassName = undefined;
+
+    const getMatchedSelectorClassName = (rootNode) => {
+      if (matchedSelectorClassName === undefined) {
+        const nodeSelectorClassName = this.subscribersSelectorClassNames.filter(selectorClassName => {
+          return rootNode.classList !== undefined && rootNode.classList.contains(selectorClassName)
+        });
+
+        if (nodeSelectorClassName.length > 0) {
+          matchedSelectorClassName = nodeSelectorClassName[0];
+        } else {
+          Array.from(rootNode.childNodes).forEach(node => getMatchedSelectorClassName(node));
+        }
+      }
+    };
+
+    getMatchedSelectorClassName(rootNode);
+    return matchedSelectorClassName;
   }
 }
 
