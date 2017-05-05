@@ -16,6 +16,7 @@ import Event from './Event';
 import EventPublisher from './EventPublisher';
 import EventSubscriber from './EventSubscriber';
 import Priority from './Priority/Priority';
+import NodeAddedObserver from './AddDOMNode/NodeAddedObserver';
 import {onDomReady, onDomLoaded, onWindowResized} from './DOMEventSubscriptions';
 import {listenDomReady, listenDomLoaded, listenWindowResized} from './DOMEventPublishers';
 
@@ -28,6 +29,7 @@ export {
   EventPublisher,
   EventSubscriber,
   Priority,
+  NodeAddedObserver,
   onDomReady,
   onDomLoaded,
   onWindowResized

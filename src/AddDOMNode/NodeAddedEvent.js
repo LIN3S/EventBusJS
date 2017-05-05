@@ -12,11 +12,20 @@
 
 'use strict';
 
-const EventTypes = {
-  DOM_READY: 'DOM_READY',
-  DOM_LOADED: 'DOM_LOADED',
-  NODE_ADDED: 'NODE_ADDED',
-  WINDOW_RESIZED: 'WINDOW_RESIZED'
-};
+import Event from './../Event';
+import EventTypes from './../EventTypes';
 
-export default EventTypes;
+class NodeAddedEvent extends Event {
+
+  node;
+  domSelectorClassName;
+
+  constructor(node, domSelectorClassName) {
+    super(EventTypes.NODE_ADDED);
+
+    this.node = node;
+    this.domSelectorClassName = domSelectorClassName;
+  }
+}
+
+export default NodeAddedEvent;
