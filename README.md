@@ -49,8 +49,7 @@ onWindowResized(onResized);
 
 ## Unsubscribing a subscriber
 In the following example we are showing how to unsubscribe a previously subscribed subscriber. Every shortcut method 
-(onDomReady, onDomLoaded, onWindowResized) returns the associated subscriber, so we can unsubscribe it later on via 
-the EventPublisher. 
+returns the associated subscriber, so we can unsubscribe it later on via the EventPublisher. 
 ```js
 // your-dom-js-file.js
 
