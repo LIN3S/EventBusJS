@@ -19,30 +19,36 @@ import WindowResizedEventSubscriber from './WindowResizedEventSubscriber';
 import Priority from './Priority/Priority';
 
 const onDomReady = (onReadyCallback, priority) => {
-  EventPublisher.subscribe(
-    new DOMReadyEventSubscriber(
-      onReadyCallback,
-      new Priority(priority)
-    )
+  const domReadyEventSubscriber = new DOMReadyEventSubscriber(
+    onReadyCallback,
+    new Priority(priority)
   );
+
+  EventPublisher.subscribe(domReadyEventSubscriber);
+
+  return domReadyEventSubscriber;
 };
 
 const onDomLoaded = (onLoadedCallback, priority) => {
-  EventPublisher.subscribe(
-    new DOMLoadedEventSubscriber(
-      onLoadedCallback,
-      new Priority(priority)
-    )
+  const domLoadedEventSubscriber = new DOMLoadedEventSubscriber(
+    onLoadedCallback,
+    new Priority(priority)
   );
+
+  EventPublisher.subscribe(domLoadedEventSubscriber);
+
+  return domLoadedEventSubscriber;
 };
 
 const onWindowResized = (onWindowResizedCallback, priority) => {
-  EventPublisher.subscribe(
-    new WindowResizedEventSubscriber(
-      onWindowResizedCallback,
-      new Priority(priority)
-    )
+  const windowResizedEventSubscriber = new WindowResizedEventSubscriber(
+    onWindowResizedCallback,
+    new Priority(priority)
   );
+
+  EventPublisher.subscribe(windowResizedEventSubscriber);
+
+  return windowResizedEventSubscriber;
 };
 
 export {onDomReady, onDomLoaded, onWindowResized};
