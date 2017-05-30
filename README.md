@@ -47,6 +47,29 @@ onDomLoaded(onLoaded);
 onWindowResized(onResized);
 ```
 
+## Unsubscribing a subscriber
+In the following example we are showing how to unsubscribe a previously subscribed subscriber. Every shortcut method 
+returns the associated subscriber, so we can unsubscribe it later on via the EventPublisher. 
+```js
+// your-dom-js-file.js
+
+import {onWindowResized, EventPublisher} from 'lin3s-event-bus';
+
+const onResized = (windowResizedEvent) => {
+  const
+    newWindowHeight = windowResizedEvent.windowWidth,
+    newWindowWidth = windowResizedEvent.windowWidth;
+
+  console.log('window is resized!', newWindowWidth, newWindowHeight);
+};
+
+const windowResizedSubscriber = onWindowResized(onResized);
+
+// later on
+
+EventPublisher.unsubscribe(windowResizedSubscriber);
+```
+
 ## Usage with priorities
 In the following example there are two modules that are listening the `WindowResizedEvent` event, but the `module-b.js`
 is listening the event with higher priority than the `module-a.js` so, the `module-b.js`'s onResized subscriber
