@@ -71,36 +71,38 @@ class NodeAddedObserver {
     mutations.forEach(mutation =>
       Array.from(mutation.addedNodes)
         .forEach(node => {
-          const matchedSelectorClassName = this.getMatchedSelectorClassNameByNode(node);
+          const
+            matchedNodesByClassName = this.getMatchedNodesByClassName(node),
+            matchedClassNames = Object.keys(matchedNodesByClassName);
 
-          if (matchedSelectorClassName !== undefined) {
-            EventPublisher.publish(
-              new NodeAddedEvent(node, matchedSelectorClassName)
-            );
+          if (matchedClassNames.length === 0) {
+            return;
           }
+
+          matchedClassNames.forEach(className =>
+            EventPublisher.publish(new NodeAddedEvent(matchedNodesByClassName[className], className))
+          );
         })
     );
   }
 
-  getMatchedSelectorClassNameByNode(rootNode) {
-    let matchedSelectorClassName = undefined;
+  getMatchedNodesByClassName(rootNode) {
+    let matchedNodesByClassName = {};
 
-    const getMatchedSelectorClassName = (rootNode) => {
-      if (matchedSelectorClassName === undefined) {
-        const nodeSelectorClassName = this.subscribersSelectorClassNames.filter(selectorClassName => {
-          return rootNode.classList !== undefined && rootNode.classList.contains(selectorClassName)
-        });
-
-        if (nodeSelectorClassName.length > 0) {
-          matchedSelectorClassName = nodeSelectorClassName[0];
-        } else {
-          Array.from(rootNode.childNodes).forEach(node => getMatchedSelectorClassName(node));
+    const getMatchedNodesBySelectorClassName = (rootNode) => {
+      this.subscribersSelectorClassNames.forEach(selectorClassName => {
+        if (rootNode.classList !== undefined && rootNode.classList.contains(selectorClassName)) {
+          matchedNodesByClassName[selectorClassName] = matchedNodesByClassName[selectorClassName] !== undefined
+            ? matchedNodesByClassName[selectorClassName].concat(rootNode)
+            : [rootNode];
         }
-      }
+      });
+
+      Array.from(rootNode.childNodes).forEach(node => getMatchedNodesBySelectorClassName(node));
     };
 
-    getMatchedSelectorClassName(rootNode);
-    return matchedSelectorClassName;
+    getMatchedNodesBySelectorClassName(rootNode);
+    return matchedNodesByClassName;
   }
 }
 
