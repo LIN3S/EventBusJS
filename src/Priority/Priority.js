@@ -13,8 +13,8 @@
 
 class Priority {
   constructor(priority = 0) {
-    if (!(typeof priority === "number" && isFinite(priority) && Math.floor(priority) === priority && priority >= 0)) {
-      throw new TypeError('Priority must be a positive integer.');
+    if (!(typeof priority === "number" && isFinite(priority) && Math.floor(priority) === priority)) {
+      throw new TypeError('Priority must be an integer.');
     }
 
     const privatePriority = priority;
