@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import EventPublisher from './EventPublisher';
 import DOMReadyEventSubscriber from './DOMReadyEventSubscriber';
 import DOMLoadedEventSubscriber from './DOMLoadedEventSubscriber';

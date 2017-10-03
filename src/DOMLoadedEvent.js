@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import Event from './Event';
 import EventTypes from './EventTypes';
 

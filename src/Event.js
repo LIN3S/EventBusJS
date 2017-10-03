@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 class Event {
   constructor(aName) {
     this.name = aName;

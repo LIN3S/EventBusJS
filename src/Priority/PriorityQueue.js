@@ -9,8 +9,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 class PriorityQueue {
   constructor() {
     const queue = [];

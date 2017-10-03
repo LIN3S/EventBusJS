@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import PriorityQueue from './Priority/PriorityQueue';
 
 class EventPublisher {

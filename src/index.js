@@ -10,19 +10,13 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import Event from './Event';
 import EventPublisher from './EventPublisher';
 import EventSubscriber from './EventSubscriber';
 import Priority from './Priority/Priority';
 import NodeAddedObserver from './AddDOMNode/NodeAddedObserver';
 import {onDomReady, onDomLoaded, onWindowResized} from './DOMEventSubscriptions';
-import {listenDomReady, listenDomLoaded, listenWindowResized} from './DOMEventPublishers';
-
-listenDomReady();
-listenDomLoaded();
-listenWindowResized();
+import init from './DOMEventPublishers';
 
 export {
   Event,
@@ -32,5 +26,6 @@ export {
   NodeAddedObserver,
   onDomReady,
   onDomLoaded,
-  onWindowResized
+  onWindowResized,
+  init
 }

@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 const EventTypes = {
   DOM_READY: 'DOM_READY',
   DOM_LOADED: 'DOM_LOADED',

@@ -9,8 +9,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 class Priority {
   constructor(priority = 0) {
     if (!(typeof priority === "number" && isFinite(priority) && Math.floor(priority) === priority)) {

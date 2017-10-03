@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import Priority from './Priority/Priority';
 
 class EventSubscriber {

@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import EventPublisher from './EventPublisher';
 import DOMReadyEvent from './DOMReadyEvent';
 import DOMLoadedEvent from './DOMLoadedEvent';
@@ -42,4 +40,8 @@ const listenWindowResized = (debounceDelay = 200) => {
   }, debounceDelay));
 };
 
-export {listenDomReady, listenDomLoaded, listenWindowResized};
+export default () => {
+  listenDomReady();
+  listenDomLoaded();
+  listenWindowResized();
+};

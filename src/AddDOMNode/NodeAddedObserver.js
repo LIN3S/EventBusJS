@@ -10,8 +10,6 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-'use strict';
-
 import NodeAddedEvent from './NodeAddedEvent';
 import NodeAddedEventSubscriber from './NodeAddedEventSubscriber';
 import EventPublisher from './../EventPublisher';
