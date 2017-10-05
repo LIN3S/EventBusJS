@@ -6,7 +6,7 @@ To get the diff for a specific change, go to https://github.com/LIN3S/EventBusJS
 To get the diff between two versions, go to https://github.com/LIN3S/EventBusJS/compare/v0.5.0...v0.6.0
 
 * 0.7.0
-    * `LigeTimeEventPublisher` will work as the previously named `EventPublisher` did.
+    * `LifeTimeEventPublisher` will work as the previously named `EventPublisher` did.
     * `OneTimeEventPublisher` will track published events, so a subscriber's callback will be inmediately executed if subscribed after the associated event is published.
     * [BC break] `EventPublisher` is now an *abstract* class. `OneTimeEventPublisher` and `LifeTimeEventPublisher` instances are exported instead.
     * [BC break] `NodeAddedObserver` is no longer exported. Instead, `onNodeAdded` subscription is exposed.  
