@@ -43,7 +43,7 @@ class PriorityQueue {
         this.sort();
       }
 
-      return queue;
+      return [...queue];
     };
   }
 }

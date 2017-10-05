@@ -13,10 +13,12 @@
 import EventPublisher from './../Core/EventPublisher';
 import DomLoadedEvent from './../Events/DomLoadedEvent';
 
+const publishDomLoadedEvent = () => EventPublisher.publish(new DomLoadedEvent());
+
 export default () => {
-  window.addEventListener('load', () => {
-    EventPublisher.publish(
-      new DomLoadedEvent()
-    );
-  });
+  if (document.readyState === 'complete') {
+    publishDomLoadedEvent();
+  } else {
+    window.addEventListener('load', () => publishDomLoadedEvent());
+  }
 };
