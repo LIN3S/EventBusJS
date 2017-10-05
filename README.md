@@ -15,10 +15,6 @@ or alternatively through *NPM*:
 ```bash
 $ npm install --save lin3s-event-bus
 ```
-Also, you can install through *Bower*.
-```bash
-$ bower install --save lin3s-event-bus
-```
 
 ## Basic Usage
 ```js
