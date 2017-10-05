@@ -9,7 +9,7 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-class PriorityQueue {
+class EventSubscriberPriorityQueue {
   constructor() {
     const queue = [];
 
@@ -48,4 +48,4 @@ class PriorityQueue {
   }
 }
 
-export default PriorityQueue;
+export default EventSubscriberPriorityQueue;

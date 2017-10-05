@@ -22,11 +22,9 @@ import listenDomReady from './Publishers/DomReadyEventPublisher';
 import listenDomLoaded from './Publishers/DomLoadedEventPublisher';
 import listenWindowResized from './Publishers/WindowResizedEventPublisher';
 
-const init = () => {
-  listenDomReady();
-  listenDomLoaded();
-  listenWindowResized();
-};
+listenDomReady();
+listenDomLoaded();
+listenWindowResized();
 
 const
   Core = {
@@ -45,7 +43,6 @@ const
 export {
   Core,
   Subscriptions,
-  init,
   Event,
   EventPublisher,
   EventSubscriber,

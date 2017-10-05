@@ -10,11 +10,11 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import PriorityQueue from './Priority/PriorityQueue';
+import EventSubscriberPriorityQueue from './Priority/EventSubscriberPriorityQueue';
 
 class EventPublisher {
   constructor() {
-    this.subscribers = new PriorityQueue();
+    this.subscribers = new EventSubscriberPriorityQueue();
   }
 
   subscribe(aSubscriber) {
