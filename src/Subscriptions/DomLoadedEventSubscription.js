@@ -10,7 +10,7 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventPublisher from './../Core/EventPublisher';
+import OneTimeEventPublisher from './../Core/EventPublisher/OneTimeEventPublisher';
 import Priority from './../Core/Priority/Priority';
 import DomLoadedEventSubscriber from './../Subscribers/DomLoadedEventSubscriber';
 
@@ -20,7 +20,7 @@ export default (onLoadedCallback, priority) => {
     new Priority(priority)
   );
 
-  EventPublisher.subscribe(domLoadedEventSubscriber);
+  OneTimeEventPublisher.subscribe(domLoadedEventSubscriber);
 
   return domLoadedEventSubscriber;
 };

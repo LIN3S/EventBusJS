@@ -10,10 +10,10 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventPublisher from './../Core/EventPublisher';
+import OneTimeEventPublisher from './../Core/EventPublisher/OneTimeEventPublisher';
 import DomLoadedEvent from './../Events/DomLoadedEvent';
 
-const publishDomLoadedEvent = () => EventPublisher.publish(new DomLoadedEvent());
+const publishDomLoadedEvent = () => OneTimeEventPublisher.publish(new DomLoadedEvent());
 
 export default () => {
   if (document.readyState === 'complete') {

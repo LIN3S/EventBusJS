@@ -27,7 +27,7 @@ class EventSubscriber {
       return;
     }
 
-    return this.callback(anEvent);
+    this.callback(anEvent);
   }
 
   isSubscribedTo(anEvent) {

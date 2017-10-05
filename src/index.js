@@ -11,7 +11,9 @@
  */
 
 import Event from './Core/Event';
-import EventPublisher from './Core/EventPublisher';
+import EventPublisher from './Core/EventPublisher/EventPublisher';
+import OneTimeEventPublisher from './Core/EventPublisher/OneTimeEventPublisher';
+import LifeTimeEventPublisher from './Core/EventPublisher/LifeTimeEventPublisher';
 import EventSubscriber from './Core/EventSubscriber';
 import Priority from './Core/Priority/Priority';
 import onDomReady from './Subscriptions/DomReadyEventSubscription';
@@ -30,6 +32,8 @@ const
   Core = {
     Event,
     EventPublisher,
+    OneTimeEventPublisher,
+    LifeTimeEventPublisher,
     EventSubscriber,
     Priority
   },
@@ -45,6 +49,8 @@ export {
   Subscriptions,
   Event,
   EventPublisher,
+  OneTimeEventPublisher,
+  LifeTimeEventPublisher,
   EventSubscriber,
   Priority,
   onDomReady,

@@ -6,17 +6,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author Beñat Espiña <benatespina@gmail.com>
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventSubscriberPriorityQueue from './Priority/EventSubscriberPriorityQueue';
+import EventPublisher from './EventPublisher';
 
-class EventPublisher {
-  constructor() {
-    this.subscribers = new EventSubscriberPriorityQueue();
-  }
-
+class LifeTimeEventPublisher extends EventPublisher {
   subscribe(aSubscriber) {
     this.subscribers.push(aSubscriber);
   }
@@ -25,14 +20,9 @@ class EventPublisher {
     this.subscribers.remove(aSubscriber);
   }
 
-  publish(anEvent) {
-    const subscribers = this.subscribers.getSubscribers();
-    subscribers.forEach((subscriber) => {
-      subscriber.handle(anEvent);
-    });
-  }
+  prePublish(anEvent) {}
 }
 
-const instance = new EventPublisher();
+const instance = new LifeTimeEventPublisher();
 
 export default instance;

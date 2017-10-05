@@ -10,7 +10,7 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventPublisher from './../Core/EventPublisher';
+import LifeTimeEventPublisher from './../Core/EventPublisher/LifeTimeEventPublisher';
 import Priority from './../Core/Priority/Priority';
 import NodeAddedEventSubscriber from './../Subscribers/NodeAddedEventSubscriber';
 import NodeAddedEvent from './../Events/NodeAddedEvent';
@@ -56,7 +56,7 @@ class NodeAddedEventPublisher {
       selectorClassName
     );
 
-    EventPublisher.subscribe(nodeAddedSubscriber);
+    LifeTimeEventPublisher.subscribe(nodeAddedSubscriber);
 
     if (!this.isMutationObserverInitialized) {
       this.initMutationObserver();
@@ -78,7 +78,7 @@ class NodeAddedEventPublisher {
           }
 
           matchedClassNames.forEach(className =>
-            EventPublisher.publish(new NodeAddedEvent(matchedNodesByClassName[className], className))
+            LifeTimeEventPublisher.publish(new NodeAddedEvent(matchedNodesByClassName[className], className))
           );
         })
     );

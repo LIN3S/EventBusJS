@@ -10,7 +10,7 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventPublisher from './../Core/EventPublisher';
+import LifeTimeEventPublisher from './../Core/EventPublisher/LifeTimeEventPublisher';
 import Priority from './../Core/Priority/Priority';
 import WindowResizedEventSubscriber from './../Subscribers/WindowResizedEventSubscriber';
 
@@ -20,7 +20,7 @@ export default (onWindowResizedCallback, priority) => {
     new Priority(priority)
   );
 
-  EventPublisher.subscribe(windowResizedEventSubscriber);
+  LifeTimeEventPublisher.subscribe(windowResizedEventSubscriber);
 
   return windowResizedEventSubscriber;
 };

@@ -10,10 +10,10 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventPublisher from './../Core/EventPublisher';
+import OneTimeEventPublisher from './../Core/EventPublisher/OneTimeEventPublisher';
 import DomReadyEvent from './../Events/DomReadyEvent';
 
-const publishDomReadyEvent = () => EventPublisher.publish(new DomReadyEvent());
+const publishDomReadyEvent = () => OneTimeEventPublisher.publish(new DomReadyEvent());
 
 export default () => {
   if (document.readyState === 'interactive' || document.readyState === 'complete') {

@@ -11,12 +11,12 @@
  */
 
 import debounce from 'lodash.debounce';
-import EventPublisher from './../Core/EventPublisher';
+import LifeTimeEventPublisher from './../Core/EventPublisher/LifeTimeEventPublisher';
 import WindowResizedEvent from './../Events/WindowResizedEvent';
 
 export default (debounceDelay = 200) => {
   window.addEventListener('resize', debounce(() => {
-    EventPublisher.publish(
+    LifeTimeEventPublisher.publish(
       new WindowResizedEvent(window.innerHeight, window.innerWidth)
     );
   }, debounceDelay));

@@ -6,9 +6,13 @@ To get the diff for a specific change, go to https://github.com/LIN3S/EventBusJS
 To get the diff between two versions, go to https://github.com/LIN3S/EventBusJS/compare/v0.5.0...v0.6.0
 
 * 0.7.0
-    * The EventSubscriberPriorityQueue's getSubscribers method now returns an immutable object.
-    * Refactored DomLoadedEventPublisher to check the initial document's readyState.
-    * Refactored DomReadyEventPublisher to check the initial document's readyState.
+    * `LigeTimeEventPublisher` will work as the previously named `EventPublisher` did.
+    * `OneTimeEventPublisher` will track published events, so a subscriber's callback will be inmediately executed if subscribed after the associated event is published.
+    * [BC break] `EventPublisher` is now an *abstract* class. `OneTimeEventPublisher` and `LifeTimeEventPublisher` instances are exported instead.
+    * [BC break] `NodeAddedObserver` is no longer exported. Instead, `onNodeAdded` subscription is exposed.  
+    * The `EventSubscriberPriorityQueue`'s `getSubscribers` method now returns an immutable object.
+    * Refactored `DomLoadedEventPublisher` to check the initial document's readyState.
+    * Refactored `DomReadyEventPublisher` to check the initial document's readyState.
     * Exported named `Core` and `Subscriptions` for a more dev-friendly use.
     * Refactored library folder structure.
 * 0.6.1
