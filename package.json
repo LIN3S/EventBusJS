@@ -1,6 +1,6 @@
 {
   "name": "lin3s-event-bus",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "license": "MIT",
   "description": "Simple but powerful event bus written in ES2015",
   "keywords": [
@@ -33,14 +33,15 @@
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
     "build:main": "webpack --output-filename lin3s-event-bus.js",
-    "build:main.min": "webpack --output-filename lin3s-event-bus.js -p",
-    "build:umd": "webpack --output-filename lin3s-event-bus.umd.js --env.libraryTarget umd",
-    "build:umd.min": "webpack --output-filename lin3s-event-bus.umd.min.js --env.libraryTarget umd -p"
+    "build:umd": "webpack --output-filename lin3s-event-bus.umd.js --env.libraryTarget umd"
   },
   "babel": {
     "presets": [
       "es2015",
       "stage-2"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
     ]
   },
   "dependencies": {

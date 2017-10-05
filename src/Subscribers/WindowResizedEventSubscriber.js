@@ -10,8 +10,8 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventSubscriber from './EventSubscriber';
-import WindowResizedEvent from './WindowResizedEvent';
+import EventSubscriber from './../Core/EventSubscriber';
+import WindowResizedEvent from './../Events/WindowResizedEvent';
 
 class WindowResizedEventSubscriber extends EventSubscriber {
   constructor(aCallback, aPriority) {

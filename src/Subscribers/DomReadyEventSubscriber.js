@@ -10,19 +10,19 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventSubscriber from './EventSubscriber';
-import DOMLoadedEvent from './DOMLoadedEvent';
+import EventSubscriber from './../Core/EventSubscriber';
+import DomReadyEvent from './../Events/DomReadyEvent';
 
-class DOMLoadedEventSubscriber extends EventSubscriber {
+class DomReadyEventSubscriber extends EventSubscriber {
   constructor(aCallback, aPriority) {
     super(aCallback, aPriority);
   }
 
   isSubscribedTo(anEvent) {
-    const event = new DOMLoadedEvent();
+    const event = new DomReadyEvent();
 
     return anEvent.getName() === event.getName();
   }
 }
 
-export default DOMLoadedEventSubscriber;
+export default DomReadyEventSubscriber;

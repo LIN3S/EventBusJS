@@ -10,12 +10,12 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import NodeAddedEvent from './NodeAddedEvent';
-import NodeAddedEventSubscriber from './NodeAddedEventSubscriber';
-import EventPublisher from './../EventPublisher';
-import Priority from './../Priority/Priority';
+import EventPublisher from './../Core/EventPublisher';
+import Priority from './../Core/Priority/Priority';
+import NodeAddedEventSubscriber from './../Subscribers/NodeAddedEventSubscriber';
+import NodeAddedEvent from './../Events/NodeAddedEvent';
 
-class NodeAddedObserver {
+class NodeAddedEventPublisher {
 
   isMutationObserverInitialized;
   mutationObserver;
@@ -50,19 +50,19 @@ class NodeAddedObserver {
 
     this.subscribersSelectorClassNames.push(selectorClassName);
 
-    EventPublisher.subscribe(
-      new NodeAddedEventSubscriber(
-        onNodeAddedCallback,
-        new Priority(priority),
-        selectorClassName
-      )
+    const nodeAddedSubscriber = new NodeAddedEventSubscriber(
+      onNodeAddedCallback,
+      new Priority(priority),
+      selectorClassName
     );
 
-    if (this.isMutationObserverInitialized) {
-      return;
+    EventPublisher.subscribe(nodeAddedSubscriber);
+
+    if (!this.isMutationObserverInitialized) {
+      this.initMutationObserver();
     }
 
-    this.initMutationObserver();
+    return nodeAddedSubscriber;
   }
 
   onNodeMutated(mutations) {
@@ -104,6 +104,6 @@ class NodeAddedObserver {
   }
 }
 
-const instance = new NodeAddedObserver();
+const instance = new NodeAddedEventPublisher();
 
 export default instance;

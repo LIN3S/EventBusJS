@@ -10,13 +10,13 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import Event from './Event';
+import Event from './../Core/Event';
 import EventTypes from './EventTypes';
 
-class DOMLoadedEvent extends Event {
+class DomReadyEvent extends Event {
   constructor() {
-    super(EventTypes.DOM_LOADED);
+    super(EventTypes.DOM_READY);
   }
 }
 
-export default DOMLoadedEvent;
+export default DomReadyEvent;

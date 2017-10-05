@@ -10,8 +10,8 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import Event from './../Event';
-import EventTypes from './../EventTypes';
+import Event from './../Core/Event';
+import EventTypes from './EventTypes';
 
 class NodeAddedEvent extends Event {
 

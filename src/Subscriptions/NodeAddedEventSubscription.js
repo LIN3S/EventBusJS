@@ -10,16 +10,8 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import Event from './Event';
-import EventTypes from './EventTypes';
+import NodeAddedEventPublisher from './../Publishers/NodeAddedEventPublisher';
 
-class WindowResizedEvent extends Event {
-  constructor(windowHeight, windowWidth) {
-    super(EventTypes.WINDOW_RESIZED);
-
-    this.windowHeight = windowHeight;
-    this.windowWidth = windowWidth;
-  }
-}
-
-export default WindowResizedEvent;
+export default (selectorClassName, onNodeAddedCallback, priority) => {
+  return NodeAddedEventPublisher.subscribe(selectorClassName, onNodeAddedCallback, priority);
+};

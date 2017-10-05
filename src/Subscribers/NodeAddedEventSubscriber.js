@@ -10,8 +10,8 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventSubscriber from './../EventSubscriber';
-import NodeAddedEvent from './NodeAddedEvent';
+import EventSubscriber from './../Core/EventSubscriber';
+import NodeAddedEvent from './../Events/NodeAddedEvent';
 
 class NodeAddedEventSubscriber extends EventSubscriber {
 

@@ -10,13 +10,13 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import Event from './Event';
-import EventTypes from './EventTypes';
+import EventPublisher from './../Core/EventPublisher';
+import DomLoadedEvent from './../Events/DomLoadedEvent';
 
-class DOMReadyEvent extends Event {
-  constructor() {
-    super(EventTypes.DOM_READY);
-  }
-}
-
-export default DOMReadyEvent;
+export default () => {
+  window.addEventListener('load', () => {
+    EventPublisher.publish(
+      new DomLoadedEvent()
+    );
+  });
+};

@@ -10,22 +10,48 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import Event from './Event';
-import EventPublisher from './EventPublisher';
-import EventSubscriber from './EventSubscriber';
-import Priority from './Priority/Priority';
-import NodeAddedObserver from './AddDOMNode/NodeAddedObserver';
-import {onDomReady, onDomLoaded, onWindowResized} from './DOMEventSubscriptions';
-import init from './DOMEventPublishers';
+import Event from './Core/Event';
+import EventPublisher from './Core/EventPublisher';
+import EventSubscriber from './Core/EventSubscriber';
+import Priority from './Core/Priority/Priority';
+import onDomReady from './Subscriptions/DomReadyEventSubscription';
+import onDomLoaded from './Subscriptions/DomLoadedEventSubscription';
+import onWindowResized from './Subscriptions/WindowResizedEventSubscription';
+import onNodeAdded from './Subscriptions/NodeAddedEventSubscription';
+import listenDomReady from './Publishers/DomReadyEventPublisher';
+import listenDomLoaded from './Publishers/DomLoadedEventPublisher';
+import listenWindowResized from './Publishers/WindowResizedEventPublisher';
+
+const init = () => {
+  listenDomReady();
+  listenDomLoaded();
+  listenWindowResized();
+};
+
+const
+  Core = {
+    Event,
+    EventPublisher,
+    EventSubscriber,
+    Priority
+  },
+  Subscriptions = {
+    onDomReady,
+    onDomLoaded,
+    onWindowResized,
+    onNodeAdded
+  };
 
 export {
+  Core,
+  Subscriptions,
+  init,
   Event,
   EventPublisher,
   EventSubscriber,
   Priority,
-  NodeAddedObserver,
   onDomReady,
   onDomLoaded,
   onWindowResized,
-  init
-}
+  onNodeAdded
+};
