@@ -144,11 +144,6 @@ class CustomEventSubscriber extends Core.EventSubscriber {
   }
 
   isSubscribedTo(anEvent) {
-    const payload = {
-      // ...
-    };
-    const event = new CustomEvent(payload);
-
     // You can define your own custom validation logic. But at least, the event's name must match.
     return anEvent.getName() === event.getName();
   }
@@ -174,11 +169,17 @@ import {OneTimeEventPublisher} from 'lin3s-event-bus';
 
 import CustomEvent from './CustomEvent';
 
-Core.LifeTimeEventPublisher.publish(new CustomEvent(payloadObject));
-Core.OneTimeEventPublisher.publish(new CustomEvent(payloadObject));
+const payload = {
+  // ...
+};
+
+const customEvent = new CustomEvent(payload);
+
+Core.LifeTimeEventPublisher.publish(customEvent);
+Core.OneTimeEventPublisher.publish(customEvent);
 // or
-LifeTimeEventPublisher.publish(new CustomEvent(payloadObject));
-OneTimeEventPublisher.publish(new CustomEvent(payloadObject));
+LifeTimeEventPublisher.publish(customEvent);
+OneTimeEventPublisher.publish(customEvent);
 ```
 
 Subscribing:
