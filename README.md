@@ -43,6 +43,47 @@ onDomLoaded(onLoaded);
 onWindowResized(onResized);
 ```
 
+## onNodeAdded
+
+This helper method will subscribe to the *NodeAddedObserver* for DOM injection lookups. Each time a `className`-matching 
+DOM node is added to the document's body, your passed callback wil be called.
+
+This is really helpful for defining a component's behaviour independently of the time of the component being added to 
+the page. For example, if we want to trigger some logic, or initialize a component after being injected to the DOM 
+dinamically.
+
+For the time being, the undelying subscriber will only provide you DOM nodes which css classlist contains your provided 
+css class.
+
+For instance:
+
+```js
+// your-dom-js-file.js
+
+import {onDomReady, onNodeAdded} from 'lin3s-event-bus';
+import MyComponent from './MyComponent';
+
+const LOOKUP_CSS_CLASS = 'js-my-component';
+
+const initMyComponent = (domNode) => {
+  const myComponent = new MyComponent(domNode);
+  
+  // Whatever...
+};
+
+const onReady = () => {
+  const myComponents = document.querySelectorAll(`.${LOOKUP_CSS_CLASS}`);
+  
+  myComponents.forEach(myComponent => initMyComponent(myComponent));
+  
+  onNodeAdded(LOOKUP_CSS_CLASS, nodeAddedEvent => {
+    nodeAddedEvent.nodes.forEach(myComponentNode => initMyComponent(myComponentNode));
+  });
+};
+
+onDomReady(onReady);
+```
+
 ## Unsubscribing a subscriber
 In the following example we are showing how to unsubscribe a previously subscribed subscriber. Every shortcut method 
 returns the associated subscriber, so we can unsubscribe it later on via the LifeTimeEventPublisher or the 
