@@ -5,7 +5,9 @@ This changelog references the relevant changes done between versions.
 To get the diff for a specific change, go to https://github.com/LIN3S/EventBusJS/commit/XXX where XXX is the change hash 
 To get the diff between two versions, go to https://github.com/LIN3S/EventBusJS/compare/v0.6.0...v0.7.0
 
-* 0.8.0 (dev-master)
+* 0.8.0
+    * Refactored NodeAddedObserver added node's matching strategy. It now accepts any native css selectors.
+    * Added onNodeAdded documentation.
     * Removed Bower support.
     * Removed `lodash.debounce` as peer dependency
 * 0.7.0
