@@ -19,10 +19,10 @@ class NodeAddedEventPublisher {
 
   isMutationObserverInitialized;
   mutationObserver;
-  subscribersSelectorClassNames;
+  subscribersSelectors;
 
   constructor() {
-    this.subscribersSelectorClassNames = [];
+    this.subscribersSelectors = [];
     this.isMutationObserverInitialized = false;
   }
 
@@ -41,19 +41,17 @@ class NodeAddedEventPublisher {
     this.isMutationObserverInitialized = true;
   }
 
-  subscribe(selectorClassName, onNodeAddedCallback, priority) {
-    if (this.subscribersSelectorClassNames.find(subscriberSelectorClassName =>
-      subscriberSelectorClassName === selectorClassName) !== undefined
-    ) {
+  subscribe(selector, onNodeAddedCallback, priority) {
+    if (this.subscribersSelectors.find(subscriberSelector => subscriberSelector === selector) !== undefined) {
       return;
     }
 
-    this.subscribersSelectorClassNames.push(selectorClassName);
+    this.subscribersSelectors.push(selector);
 
     const nodeAddedSubscriber = new NodeAddedEventSubscriber(
       onNodeAddedCallback,
       new Priority(priority),
-      selectorClassName
+      selector
     );
 
     LifeTimeEventPublisher.subscribe(nodeAddedSubscriber);
@@ -70,37 +68,40 @@ class NodeAddedEventPublisher {
       Array.from(mutation.addedNodes)
         .forEach(node => {
           const
-            matchedNodesByClassName = this.getMatchedNodesByClassName(node),
-            matchedClassNames = Object.keys(matchedNodesByClassName);
+            matchedNodesBySelector = this.getMatchedNodesBySelector(node),
+            matchedSelectors = Object.keys(matchedNodesBySelector);
 
-          if (matchedClassNames.length === 0) {
+          if (matchedSelectors.length === 0) {
             return;
           }
 
-          matchedClassNames.forEach(className =>
-            LifeTimeEventPublisher.publish(new NodeAddedEvent(matchedNodesByClassName[className], className))
+          matchedSelectors.forEach(selector =>
+            LifeTimeEventPublisher.publish(new NodeAddedEvent(matchedNodesBySelector[selector], selector))
           );
         })
     );
   }
 
-  getMatchedNodesByClassName(rootNode) {
-    let matchedNodesByClassName = {};
+  getMatchedNodesBySelector(rootNode) {
+    let matchedNodesBySelector = {};
 
-    const getMatchedNodesBySelectorClassName = (rootNode) => {
-      this.subscribersSelectorClassNames.forEach(selectorClassName => {
-        if (rootNode.classList !== undefined && rootNode.classList.contains(selectorClassName)) {
-          matchedNodesByClassName[selectorClassName] = matchedNodesByClassName[selectorClassName] !== undefined
-            ? matchedNodesByClassName[selectorClassName].concat(rootNode)
+    const getMatchedNodesBySelector = (rootNode) => {
+      this.subscribersSelectors.forEach(selector => {
+        const rootNodeMatchesSelector = Array.from(document.querySelectorAll(selector)).find(matchingNode =>
+          matchingNode === rootNode);
+
+        if (rootNodeMatchesSelector) {
+          matchedNodesBySelector[selector] = matchedNodesBySelector[selector] !== undefined
+            ? matchedNodesBySelector[selector].concat(rootNode)
             : [rootNode];
         }
       });
 
-      Array.from(rootNode.childNodes).forEach(node => getMatchedNodesBySelectorClassName(node));
+      Array.from(rootNode.childNodes).forEach(node => getMatchedNodesBySelector(node));
     };
 
-    getMatchedNodesBySelectorClassName(rootNode);
-    return matchedNodesByClassName;
+    getMatchedNodesBySelector(rootNode);
+    return matchedNodesBySelector;
   }
 }
 
