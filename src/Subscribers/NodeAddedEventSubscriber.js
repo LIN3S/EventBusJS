@@ -15,18 +15,18 @@ import NodeAddedEvent from './../Events/NodeAddedEvent';
 
 class NodeAddedEventSubscriber extends EventSubscriber {
 
-  domSelectorClassName;
+  domSelector;
 
-  constructor(aCallback, aPriority, domSelectorClassName) {
+  constructor(aCallback, aPriority, domSelector) {
     super(aCallback, aPriority);
 
-    this.domSelectorClassName = domSelectorClassName;
+    this.domSelector = domSelector;
   }
 
   isSubscribedTo(anEvent) {
     const event = new NodeAddedEvent();
 
-    return anEvent.getName() === event.getName() && this.domSelectorClassName === anEvent.domSelectorClassName;
+    return anEvent.getName() === event.getName() && this.domSelector === anEvent.domSelector;
   }
 }
 

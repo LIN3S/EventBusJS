@@ -45,15 +45,14 @@ onWindowResized(onResized);
 
 ## onNodeAdded
 
-This helper method will subscribe to the *NodeAddedObserver* for DOM injection lookups. Each time a `className`-matching 
-DOM node is added to the document's body, your passed callback wil be called.
+This helper method will subscribe to the *NodeAddedObserver* for DOM injection lookups. Each time a 
+`css selector`-matching DOM node is added to the document's body, your passed callback wil be called. In other words, 
+you will be notified if a DOM node is injected into the document's body and your provided `css selector` matches that 
+DOM node.
 
 This is really helpful for defining a component's behaviour independently of the time of the component being added to 
 the page. For example, if we want to trigger some logic, or initialize a component after being injected to the DOM 
 dinamically.
-
-For the time being, the undelying subscriber will only provide you DOM nodes which css classlist contains your provided 
-css class.
 
 For instance:
 
@@ -63,7 +62,7 @@ For instance:
 import {onDomReady, onNodeAdded} from 'lin3s-event-bus';
 import MyComponent from './MyComponent';
 
-const LOOKUP_CSS_CLASS = 'js-my-component';
+const LOOKUP_CSS_SELECTOR = '.js-my-component';
 
 const initMyComponent = (domNode) => {
   const myComponent = new MyComponent(domNode);
@@ -72,11 +71,11 @@ const initMyComponent = (domNode) => {
 };
 
 const onReady = () => {
-  const myComponents = document.querySelectorAll(`.${LOOKUP_CSS_CLASS}`);
+  const myComponents = document.querySelectorAll(LOOKUP_CSS_SELECTOR);
   
   myComponents.forEach(myComponent => initMyComponent(myComponent));
   
-  onNodeAdded(LOOKUP_CSS_CLASS, nodeAddedEvent => {
+  onNodeAdded(LOOKUP_CSS_SELECTOR, nodeAddedEvent => {
     nodeAddedEvent.nodes.forEach(myComponentNode => initMyComponent(myComponentNode));
   });
 };

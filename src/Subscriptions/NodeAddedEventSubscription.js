@@ -12,6 +12,6 @@
 
 import NodeAddedEventPublisher from './../Publishers/NodeAddedEventPublisher';
 
-export default (selectorClassName, onNodeAddedCallback, priority) => {
-  return NodeAddedEventPublisher.subscribe(selectorClassName, onNodeAddedCallback, priority);
+export default (selector, onNodeAddedCallback, priority) => {
+  return NodeAddedEventPublisher.subscribe(selector, onNodeAddedCallback, priority);
 };
