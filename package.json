@@ -1,6 +1,6 @@
 {
   "name": "lin3s-event-bus",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "license": "MIT",
   "description": "Simple but powerful event bus written in ES2015",
   "keywords": [
@@ -16,7 +16,8 @@
       "homepage": "https://lin3s.com"
     }
   ],
-  "main": "dist/lin3s-event-bus.js",
+  "main": "dist/common/index.js",
+  "module": "dist/esm/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/LIN3S/EventBusJS"
@@ -32,9 +33,9 @@
     "test": "ava",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
-    "build:watch": "webpack --output-filename lin3s-event-bus.umd.js --env.libraryTarget umd --watch",
-    "build:main": "webpack --output-filename lin3s-event-bus.js -p",
-    "build:umd": "webpack --output-filename lin3s-event-bus.umd.js -p --env.libraryTarget umd"
+    "build:common": "node_modules/.bin/babel --copy-files --out-dir dist/common src",
+    "build:esm": "mkdirp dist/esm && cp -R src/ dist/esm",
+    "build:umd": "webpack --output-filename lin3s-event-bus.umd.js -p"
   },
   "babel": {
     "presets": [
@@ -56,6 +57,7 @@
     "babel-preset-stage-2": "^6.13.0",
     "babel-register": "^6.14.0",
     "babelify": "^7.3.0",
+    "mkdirp": "^0.5.1",
     "npm-run-all": "^3.0.0",
     "rimraf": "^2.5.4",
     "webpack": "^2.2"

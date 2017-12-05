@@ -20,6 +20,7 @@ class NodeAddedEventPublisher {
   isMutationObserverInitialized;
   mutationObserver;
   subscribersSelectors;
+  selectorNodeMap;
 
   constructor() {
     this.subscribersSelectors = [];
@@ -64,6 +65,8 @@ class NodeAddedEventPublisher {
   }
 
   onNodeMutated(mutations) {
+    this.mapSelectorNodes();
+
     mutations.forEach(mutation =>
       Array.from(mutation.addedNodes)
         .forEach(node => {
@@ -82,17 +85,23 @@ class NodeAddedEventPublisher {
     );
   }
 
+  mapSelectorNodes() {
+    this.selectorNodeMap = this.subscribersSelectors.map(selector => ({
+      selector,
+      nodes: Array.from(document.querySelectorAll(selector))
+    }));
+  }
+
   getMatchedNodesBySelector(rootNode) {
     let matchedNodesBySelector = {};
 
     const getMatchedNodesBySelector = (rootNode) => {
-      this.subscribersSelectors.forEach(selector => {
-        const rootNodeMatchesSelector = Array.from(document.querySelectorAll(selector)).find(matchingNode =>
-          matchingNode === rootNode);
+      this.selectorNodeMap.forEach(selectorNodes => {
+        const rootNodeMatchesSelector = selectorNodes.nodes.find(matchingNode => matchingNode === rootNode);
 
         if (rootNodeMatchesSelector) {
-          matchedNodesBySelector[selector] = matchedNodesBySelector[selector] !== undefined
-            ? matchedNodesBySelector[selector].concat(rootNode)
+          matchedNodesBySelector[selectorNodes.selector] = matchedNodesBySelector[selectorNodes.selector] !== undefined
+            ? matchedNodesBySelector[selectorNodes.selector].concat(rootNode)
             : [rootNode];
         }
       });
