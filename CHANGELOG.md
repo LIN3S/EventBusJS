@@ -9,6 +9,8 @@ To get the diff between two versions, go to https://github.com/LIN3S/EventBusJS/
     * Refactored NodeAddedEventPublisher DOM lookup.
     * Exported bundle configurations updated. (umd, common, esm)
 * 0.8.0
+    * Refactored NodeAddedObserver added node's matching strategy. It now accepts any native css selectors.
+    * Added onNodeAdded documentation.
     * Removed Bower support.
     * Removed `lodash.debounce` as peer dependency
 * 0.7.0
