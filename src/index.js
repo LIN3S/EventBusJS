@@ -23,6 +23,7 @@ import onNodeAdded from './Subscriptions/NodeAddedEventSubscription';
 import listenDomReady from './Publishers/DomReadyEventPublisher';
 import listenDomLoaded from './Publishers/DomLoadedEventPublisher';
 import listenWindowResized from './Publishers/WindowResizedEventPublisher';
+import {initComponent} from './initComponent';
 
 listenDomReady();
 listenDomLoaded();
@@ -56,5 +57,6 @@ export {
   onDomReady,
   onDomLoaded,
   onWindowResized,
-  onNodeAdded
+  onNodeAdded,
+  initComponent
 };
