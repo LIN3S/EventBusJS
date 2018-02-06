@@ -12,21 +12,23 @@
 
 import EventSubscriber from './../Core/EventSubscriber';
 import NodeAddedEvent from './../Events/NodeAddedEvent';
+import isDomNodeDescendantOfDomNode from './../Dom/isDomNodeDescendantOfDomNode';
 
 class NodeAddedEventSubscriber extends EventSubscriber {
 
-  domSelector;
-
-  constructor(aCallback, aPriority, domSelector) {
+  constructor(aCallback, aPriority, selector, rootNode) {
     super(aCallback, aPriority);
 
-    this.domSelector = domSelector;
+    this.selector = selector;
+    this.rootNode = rootNode;
   }
 
   isSubscribedTo(anEvent) {
     const event = new NodeAddedEvent();
 
-    return anEvent.getName() === event.getName() && this.domSelector === anEvent.domSelector;
+    return anEvent.getName() === event.getName()
+      && this.selector === anEvent.selector
+      && anEvent.nodes.every(node => isDomNodeDescendantOfDomNode(node, this.rootNode));
   }
 }
 

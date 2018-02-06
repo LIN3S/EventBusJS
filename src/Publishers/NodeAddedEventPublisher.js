@@ -11,19 +11,20 @@
  */
 
 import LifeTimeEventPublisher from './../Core/EventPublisher/LifeTimeEventPublisher';
-import Priority from './../Core/Priority/Priority';
 import NodeAddedEventSubscriber from './../Subscribers/NodeAddedEventSubscriber';
 import NodeAddedEvent from './../Events/NodeAddedEvent';
+import isDomNodeDescendantOfDomNode from '../Dom/isDomNodeDescendantOfDomNode';
 
 class NodeAddedEventPublisher {
 
-  isMutationObserverInitialized;
   mutationObserver;
-  subscribersSelectors;
-  selectorNodeMap;
+  isMutationObserverInitialized;
+  subscribers;
+  subscribersMap;
 
   constructor() {
-    this.subscribersSelectors = [];
+    this.subscribers = [];
+    this.subscribersMap = [];
     this.isMutationObserverInitialized = false;
   }
 
@@ -42,20 +43,12 @@ class NodeAddedEventPublisher {
     this.isMutationObserverInitialized = true;
   }
 
-  subscribe(selector, onNodeAddedCallback, priority) {
-    if (this.subscribersSelectors.find(subscriberSelector => subscriberSelector === selector) !== undefined) {
-      return;
-    }
-
-    this.subscribersSelectors.push(selector);
-
-    const nodeAddedSubscriber = new NodeAddedEventSubscriber(
-      onNodeAddedCallback,
-      new Priority(priority),
-      selector
-    );
+  subscribe({rootNode = document, selector} = {}, onNodeAddedCallback, priority) {
+    const nodeAddedSubscriber = new NodeAddedEventSubscriber(onNodeAddedCallback, priority, selector, rootNode);
 
     LifeTimeEventPublisher.subscribe(nodeAddedSubscriber);
+
+    this.subscribers.push(nodeAddedSubscriber);
 
     if (!this.isMutationObserverInitialized) {
       this.initMutationObserver();
@@ -65,52 +58,68 @@ class NodeAddedEventPublisher {
   }
 
   onNodeMutated(mutations) {
-    this.mapSelectorNodes();
+    this.mapSubscribers();
 
     mutations.forEach(mutation =>
       Array.from(mutation.addedNodes)
-        .forEach(node => {
-          const
-            matchedNodesBySelector = this.getMatchedNodesBySelector(node),
-            matchedSelectors = Object.keys(matchedNodesBySelector);
-
-          if (matchedSelectors.length === 0) {
-            return;
-          }
-
-          matchedSelectors.forEach(selector =>
-            LifeTimeEventPublisher.publish(new NodeAddedEvent(matchedNodesBySelector[selector], selector))
-          );
-        })
+        .forEach(node => this.getMatchedNodesAndSubscribers(node).forEach(subscriberAndNodes =>
+          LifeTimeEventPublisher.publish(new NodeAddedEvent(
+            subscriberAndNodes.nodes,
+            subscriberAndNodes.subscriber.rootNode,
+            subscriberAndNodes.subscriber.selector
+          ))
+        ))
     );
   }
 
-  mapSelectorNodes() {
-    this.selectorNodeMap = this.subscribersSelectors.map(selector => ({
-      selector,
-      nodes: Array.from(document.querySelectorAll(selector))
+  mapSubscribers() {
+    this.subscribersMap = this.subscribers.map(subscriber => ({
+      rootNode: subscriber.rootNode,
+      selector: subscriber.selector,
+      nodes: Array.from(subscriber.rootNode.querySelectorAll(subscriber.selector))
     }));
   }
 
-  getMatchedNodesBySelector(rootNode) {
-    let matchedNodesBySelector = {};
+  nodeMatchesSubscriberRequirements(node, subscriber) {
+    if (node === subscriber.rootNode || !isDomNodeDescendantOfDomNode(node, subscriber.rootNode)) {
+      return false;
+    }
 
-    const getMatchedNodesBySelector = (rootNode) => {
-      this.selectorNodeMap.forEach(selectorNodes => {
-        const rootNodeMatchesSelector = selectorNodes.nodes.find(matchingNode => matchingNode === rootNode);
+    const mappedSubscriber = this.subscribersMap.find(subscriberMap => subscriberMap.selector === subscriber.selector);
 
-        if (rootNodeMatchesSelector) {
-          matchedNodesBySelector[selectorNodes.selector] = matchedNodesBySelector[selectorNodes.selector] !== undefined
-            ? matchedNodesBySelector[selectorNodes.selector].concat(rootNode)
-            : [rootNode];
+    if (mappedSubscriber === undefined) {
+      return false;
+    }
+
+    return mappedSubscriber.nodes.find(subscriberNode => subscriberNode === node);
+  }
+
+  getMatchedNodesAndSubscribers(node) {
+    let matchedSubscribersAndNodes = [];
+
+    const getMatchedNodes = (rootNode) => {
+      this.subscribers.forEach(subscriber => {
+        if (this.nodeMatchesSubscriberRequirements(rootNode, subscriber)) {
+          const matchedSubscriber = matchedSubscribersAndNodes.find(matchedSubscribersAndNode =>
+            matchedSubscribersAndNode.subscriber.selector === subscriber.selector
+            && matchedSubscribersAndNode.subscriber.rootNode === subscriber.rootNode);
+
+          if (matchedSubscriber === undefined) {
+            matchedSubscribersAndNodes.push({
+              subscriber,
+              nodes: [rootNode]
+            });
+          } else {
+            matchedSubscriber.nodes.push(rootNode);
+          }
         }
       });
 
-      Array.from(rootNode.childNodes).forEach(node => getMatchedNodesBySelector(node));
+      Array.from(rootNode.childNodes).forEach(childNode => getMatchedNodes(childNode));
     };
 
-    getMatchedNodesBySelector(rootNode);
-    return matchedNodesBySelector;
+    getMatchedNodes(node);
+    return matchedSubscribersAndNodes;
   }
 }
 
