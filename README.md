@@ -75,7 +75,8 @@ const onReady = () => {
   
   myComponents.forEach(myComponent => initMyComponent(myComponent));
   
-  onNodeAdded(LOOKUP_CSS_SELECTOR, nodeAddedEvent => {
+  // `rootNode` is the `document` by default.
+  onNodeAdded({selector: LOOKUP_CSS_SELECTOR, rootNode: document}, nodeAddedEvent => {
     nodeAddedEvent.nodes.forEach(myComponentNode => initMyComponent(myComponentNode));
   });
 };

@@ -16,13 +16,15 @@ import EventTypes from './EventTypes';
 class NodeAddedEvent extends Event {
 
   nodes;
-  domSelector;
+  rootNode;
+  selector;
 
-  constructor(nodes, domSelector) {
+  constructor(nodes, rootNode, selector) {
     super(EventTypes.NODE_ADDED);
 
     this.nodes = nodes;
-    this.domSelector = domSelector;
+    this.rootNode = rootNode;
+    this.selector = selector;
   }
 }
 

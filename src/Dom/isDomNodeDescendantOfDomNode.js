@@ -6,11 +6,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author Beñat Espiña <benatespina@gmail.com>
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import NodeAddedEventPublisher from './../Publishers/NodeAddedEventPublisher';
+export default (needleDomNode, domNode) => {
+  let parentNode = needleDomNode.parentNode;
 
-export default ({rootNode, selector}, onNodeAddedCallback, priority) =>
-  NodeAddedEventPublisher.subscribe({rootNode, selector}, onNodeAddedCallback, priority);
+  while (parentNode !== null) {
+    if (parentNode === domNode) {
+      return true;
+    }
+
+    parentNode = parentNode.parentNode;
+  }
+
+  return false;
+};
