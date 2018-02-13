@@ -7,16 +7,13 @@
  * file that was distributed with this source code.
  *
  * @author Ander Rodriguez <AnderRodriguezVarela@gmail.com>
+ * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import onDomReady from './Subscriptions/DomReadyEventSubscription';
-import onNodeAdded from './Subscriptions/NodeAddedEventSubscription';
+import onDomReady from './../../Subscriptions/DomReadyEventSubscription';
+import onNodeAdded from './../../Subscriptions/NodeAddedEventSubscription';
 
-const initComponent = (selector, callback) => {
+export default ({rootNode, selector}, callback) => {
   onDomReady(() => Array.from(document.querySelectorAll(selector), callback));
-  onNodeAdded(selector, nodesAddedEvent => Array.from(nodesAddedEvent.nodes, callback));
-};
-
-export {
-  initComponent
+  onNodeAdded({rootNode, selector}, nodesAddedEvent => Array.from(nodesAddedEvent.nodes, callback));
 };
