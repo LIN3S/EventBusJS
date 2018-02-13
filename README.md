@@ -256,7 +256,7 @@ This helper method will be used for fully initializing a component. It will subs
 ```js
 import {initComponent} from 'lin3s-event-bus';
 
-initComponent({selector: '.my-css-selector'}, componentDomNode => {
+initComponent({selector: '.my-css-selector', rootNode: document}, componentDomNode => {
     // Initialize your component with the received componentDomNode node
     // This callback will be executed with each matching node, both on DomReady and on NodeAdded events.
     // ...
