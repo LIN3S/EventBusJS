@@ -247,5 +247,23 @@ LifeTimeEventPublisher.subscribe(customEventSubscriber);
 OneTimeEventPublisher.subscribe(customEventSubscriber);
 ```
 
+## Combined subscriptions
+### Component initialization
+
+This helper method will be used for fully initializing a component. It will subscribe to the `onDomReady` and the 
+[`onNodeAdded`][1] subscriptions.
+
+```js
+import {initComponent} from 'lin3s-event-bus';
+
+initComponent({selector: '.my-css-selector', rootNode: document}, componentDomNode => {
+    // Initialize your component with the received componentDomNode node
+    // This callback will be executed with each matching node, both on DomReady and on NodeAdded events.
+    // ...
+});
+```
+
 ## Licensing Options
 [![License](https://img.shields.io/badge/License-MIT-yellowgreen.svg?style=flat-square)](https://github.com/LIN3S/EventBusJS/blob/master/LICENSE)
+
+[1]: https://github.com/LIN3S/EventBusJS#onnodeadded
