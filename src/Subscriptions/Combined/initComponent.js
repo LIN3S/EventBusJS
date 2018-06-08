@@ -11,9 +11,9 @@
  */
 
 import onDomReady from './../../Subscriptions/DomReadyEventSubscription';
-import onNodeAdded from './../../Subscriptions/NodeAddedEventSubscription';
+import onDomMutated from './../../Subscriptions/DomMutatedEventSubscription';
 
 export default ({rootNode, selector}, callback) => {
   onDomReady(() => Array.from(document.querySelectorAll(selector), callback));
-  onNodeAdded({rootNode, selector}, nodesAddedEvent => Array.from(nodesAddedEvent.nodes, callback));
+  onDomMutated({rootNode, selector}, domMutatedEvent => Array.from(domMutatedEvent.addedNodes, callback));
 };

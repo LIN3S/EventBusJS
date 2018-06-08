@@ -6,16 +6,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author Beñat Espiña <benatespina@gmail.com>
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import EventSubscriber from './../Core/EventSubscriber';
-import NodeAddedEvent from './../Events/NodeAddedEvent';
+import EventSubscriber from '../Core/EventSubscriber';
+import DomMutatedEvent from './../Events/DomMutatedEvent';
 import isDomNodeDescendantOfDomNode from './../Dom/isDomNodeDescendantOfDomNode';
 
-class NodeAddedEventSubscriber extends EventSubscriber {
-
+class DomMutatedEventSubscriber extends EventSubscriber {
   constructor(aCallback, aPriority, selector, rootNode) {
     super(aCallback, aPriority);
 
@@ -24,12 +22,20 @@ class NodeAddedEventSubscriber extends EventSubscriber {
   }
 
   isSubscribedTo(anEvent) {
-    const event = new NodeAddedEvent();
+    const event = new DomMutatedEvent();
 
     return anEvent.getName() === event.getName()
-      && this.selector === anEvent.selector
-      && anEvent.nodes.every(node => isDomNodeDescendantOfDomNode(node, this.rootNode));
+      && anEvent.selector === this.selector
+      && (anEvent.target === this.rootNode || isDomNodeDescendantOfDomNode(anEvent.target, this.rootNode));
+  }
+
+  handle(domMutatedEvent) {
+    if (!this.isSubscribedTo(domMutatedEvent)) {
+      return;
+    }
+
+    this.callback(domMutatedEvent);
   }
 }
 
-export default NodeAddedEventSubscriber;
+export default DomMutatedEventSubscriber;

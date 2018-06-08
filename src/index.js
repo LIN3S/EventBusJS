@@ -18,8 +18,8 @@ import EventSubscriber from './Core/EventSubscriber';
 import Priority from './Core/Priority/Priority';
 import onDomReady from './Subscriptions/DomReadyEventSubscription';
 import onDomLoaded from './Subscriptions/DomLoadedEventSubscription';
+import onDomMutated from './Subscriptions/DomMutatedEventSubscription';
 import onWindowResized from './Subscriptions/WindowResizedEventSubscription';
-import onNodeAdded from './Subscriptions/NodeAddedEventSubscription';
 import listenDomReady from './Publishers/DomReadyEventPublisher';
 import listenDomLoaded from './Publishers/DomLoadedEventPublisher';
 import listenWindowResized from './Publishers/WindowResizedEventPublisher';
@@ -41,8 +41,8 @@ const
   Subscriptions = {
     onDomReady,
     onDomLoaded,
+    onDomMutated,
     onWindowResized,
-    onNodeAdded
   };
 
 export {
@@ -56,7 +56,7 @@ export {
   Priority,
   onDomReady,
   onDomLoaded,
+  onDomMutated,
   onWindowResized,
-  onNodeAdded,
   initComponent
 };

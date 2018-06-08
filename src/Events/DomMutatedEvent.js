@@ -6,26 +6,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author Beñat Espiña <benatespina@gmail.com>
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
 import Event from './../Core/Event';
 import EventTypes from './EventTypes';
 
-class NodeAddedEvent extends Event {
+class DomMutatedEvent extends Event {
+  constructor({target, selector, addedNodes, removedNodes} = {}) {
+    super(EventTypes.DOM_MUTATED);
 
-  nodes;
-  rootNode;
-  selector;
-
-  constructor(nodes, rootNode, selector) {
-    super(EventTypes.NODE_ADDED);
-
-    this.nodes = nodes;
-    this.rootNode = rootNode;
+    this.target = target;
     this.selector = selector;
+    this.addedNodes = addedNodes;
+    this.removedNodes = removedNodes;
   }
 }
 
-export default NodeAddedEvent;
+export default DomMutatedEvent;

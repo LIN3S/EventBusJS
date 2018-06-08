@@ -43,23 +43,23 @@ onDomLoaded(onLoaded);
 onWindowResized(onResized);
 ```
 
-## onNodeAdded
+## onDomMutated
 
-This helper method will subscribe to the *NodeAddedObserver* for DOM injection lookups. Each time a 
-`css selector`-matching DOM node is added to the document's body, your passed callback wil be called. In other words, 
-you will be notified if a DOM node is injected into the document's body and your provided `css selector` matches that 
-DOM node.
+This helper method will subscribe to the *DomMutatedEventPublisher* for DOM injection/removal lookups. Each time a 
+`css selector`-matching DOM node is added or removed to/from the document's body (by default), or the provided `rootNode`, 
+your passed callback wil be called. In other words, you will be notified if a DOM node is injected/removed and your 
+provided `css selector` matches that DOM node.
 
 This is really helpful for defining a component's behaviour independently of the time of the component being added to 
-the page. For example, if we want to trigger some logic, or initialize a component after being injected to the DOM 
-dinamically.
+the page, or unbinding certain logic that referenced that dom node. For example, if we want to trigger some logic, or 
+initialize a component after being injected to the DOM dinamically.
 
 For instance:
 
 ```js
 // your-dom-js-file.js
 
-import {onDomReady, onNodeAdded} from 'lin3s-event-bus';
+import {onDomReady, onDomMutated} from 'lin3s-event-bus';
 import MyComponent from './MyComponent';
 
 const LOOKUP_CSS_SELECTOR = '.js-my-component';
@@ -76,8 +76,9 @@ const onReady = () => {
   myComponents.forEach(myComponent => initMyComponent(myComponent));
   
   // `rootNode` is the `document` by default.
-  onNodeAdded({selector: LOOKUP_CSS_SELECTOR, rootNode: document}, nodeAddedEvent => {
-    nodeAddedEvent.nodes.forEach(myComponentNode => initMyComponent(myComponentNode));
+  onDomMutated({selector: LOOKUP_CSS_SELECTOR, rootNode: document}, domMutatedEvent => {
+    domMutatedEvent.addedNodes.forEach(myComponentNode => initMyComponent(myComponentNode));
+    // domMutatedEvent.removedNodes
   });
 };
 
@@ -251,7 +252,7 @@ OneTimeEventPublisher.subscribe(customEventSubscriber);
 ### Component initialization
 
 This helper method will be used for fully initializing a component. It will subscribe to the `onDomReady` and the 
-[`onNodeAdded`][1] subscriptions.
+[`onDomMutated`][1] subscriptions.
 
 ```js
 import {initComponent} from 'lin3s-event-bus';
@@ -266,4 +267,4 @@ initComponent({selector: '.my-css-selector', rootNode: document}, componentDomNo
 ## Licensing Options
 [![License](https://img.shields.io/badge/License-MIT-yellowgreen.svg?style=flat-square)](https://github.com/LIN3S/EventBusJS/blob/master/LICENSE)
 
-[1]: https://github.com/LIN3S/EventBusJS#onnodeadded
+[1]: https://github.com/LIN3S/EventBusJS#ondommutated

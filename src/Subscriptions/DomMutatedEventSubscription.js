@@ -10,7 +10,7 @@
  * @author Mikel Tuesta <mikeltuesta@gmail.com>
  */
 
-import NodeAddedEventPublisher from './../Publishers/NodeAddedEventPublisher';
+import DomMutatedEventPublisher from './../Publishers/DomMutatedEventPublisher';
 
-export default ({rootNode, selector}, onNodeAddedCallback, priority) =>
-  NodeAddedEventPublisher.subscribe({rootNode, selector}, onNodeAddedCallback, priority);
+export default ({rootNode = document, selector}, onDomMutatedCallback, priority) =>
+  DomMutatedEventPublisher.subscribe(rootNode, selector, onDomMutatedCallback, priority);
